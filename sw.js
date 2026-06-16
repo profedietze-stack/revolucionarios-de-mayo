@@ -3,7 +3,7 @@
 // Cachea el app shell para uso offline. Subí CACHE_VERSION en
 // cada release para forzar actualización del cache.
 // ============================================================
-const CACHE_VERSION = 'rev-mayo-v12.2';
+const CACHE_VERSION = 'rev-mayo-v12.3';
 
 // Archivos críticos: si falta uno, cache.addAll() falla y el SW no instala.
 const APP_SHELL = [
@@ -32,6 +32,14 @@ const APP_SHELL = [
   './data/acts.js',
   './data/tooltips.js',
   './data/characters.js',
+  // Icons
+  './assets/icons/favicon.ico',
+  './assets/icons/favicon-16x16.png',
+  './assets/icons/favicon-32x32.png',
+  './assets/icons/apple-touch-icon.png',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './assets/icons/icon-maskable-512.png',
   // Engine
   './engine/debug.js',
   './engine/audio.js',
