@@ -1,0 +1,173 @@
+/* ===== MENU SCREEN ===== */
+/* ===== SPLASH SCREEN ===== */
+#screen-splash {
+  position: fixed; inset: 0;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  transition: opacity 0.9s ease;
+}
+#screen-splash.fade-out { opacity: 0; pointer-events: none; }
+
+.splash-container {
+  max-width: 620px; width: 100%;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0;
+}
+
+/* Animated shield/seal */
+.splash-seal {
+  width: 110px; height: 110px;
+  margin-bottom: 28px;
+  position: relative;
+  animation: splash-seal-in 1.2s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes splash-seal-in {
+  from { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.splash-seal svg { width: 100%; height: 100%; }
+
+/* Rotating outer ring */
+.splash-seal-ring {
+  position: absolute; inset: 0;
+  animation: splash-ring-spin 18s linear infinite;
+}
+@keyframes splash-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.splash-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem; color: rgba(197,154,64,0.45);
+  letter-spacing: 0.45em; text-transform: uppercase;
+  margin-bottom: 14px;
+  animation: splash-fadein 1.4s ease both;
+}
+
+.splash-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 700; color: var(--sepia-pale);
+  line-height: 1.05; letter-spacing: 0.04em;
+  text-shadow: 0 0 60px rgba(197,154,64,0.35), 0 2px 0 rgba(0,0,0,0.4);
+  margin-bottom: 4px;
+  animation: splash-fadein 1.6s ease both;
+}
+.splash-title-de {
+  font-size: 0.55em; color: rgba(197,154,64,0.6);
+  letter-spacing: 0.18em; display: block;
+  font-weight: 400; margin: 2px 0;
+}
+
+.splash-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+  color: rgba(197,154,64,0.55);
+  margin-bottom: 0;
+  animation: splash-fadein 1.8s ease both;
+}
+
+.splash-divider {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; margin: 22px 0;
+  animation: splash-fadein 2s ease both;
+}
+.splash-divider::before, .splash-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197,154,64,0.3), transparent);
+}
+.splash-divider-gem { color: var(--sepia); letter-spacing: 6px; font-size: 0.8rem; }
+
+/* Loading bar */
+.splash-progress-wrap {
+  width: 100%; max-width: 360px;
+  margin-bottom: 28px;
+  animation: splash-fadein 2.1s ease both;
+}
+.splash-progress-label {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  color: rgba(197,154,64,0.4); letter-spacing: 0.2em;
+  margin-bottom: 8px; text-align: left;
+}
+.splash-progress-track {
+  height: 2px;
+  background: rgba(197,154,64,0.1);
+  position: relative; overflow: hidden;
+}
+.splash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sepia), rgba(197,154,64,0.4));
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.splash-progress-step {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem; font-style: italic;
+  color: rgba(197,154,64,0.35); margin-top: 6px;
+  text-align: left; min-height: 1.2em;
+  transition: opacity 0.3s ease;
+}
+
+.splash-creator {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem; color: rgba(197,154,64,0.3);
+  letter-spacing: 0.25em; text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: splash-fadein 2.2s ease both;
+}
+
+.splash-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem; font-weight: 700;
+  letter-spacing: 0.18em; padding: 16px 52px;
+  background: transparent;
+  border: 2px solid var(--sepia);
+  color: var(--sepia-pale); cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: color 0.3s ease;
+  animation: splash-fadein 2.4s ease both;
+  -webkit-tap-highlight-color: transparent;
+}
+.splash-btn::before {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: var(--sepia); transition: left 0.3s ease; z-index: 0;
+}
+.splash-btn:hover::before, .splash-btn:active::before { left: 0; }
+.splash-btn:hover, .splash-btn:active { color: var(--ink); }
+.splash-btn span { position: relative; z-index: 1; }
+.splash-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.splash-btn:disabled::before { display: none; }
+
+/* Floating particles */
+.splash-particles {
+  position: fixed; inset: 0; pointer-events: none; overflow: hidden;
+  z-index: 0;
+}
+.splash-particle {
+  position: absolute; border-radius: 50%;
+  background: rgba(197,154,64,0.4);
+  animation: splash-particle-float linear infinite;
+}
+@keyframes splash-particle-float {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.1; }
+  100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+}
+
+@keyframes splash-fadein {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .splash-btn { padding: 14px 36px; font-size: 0.8rem; }
+  .splash-seal { width: 80px; height: 80px; }
+}
+

@@ -1,0 +1,205 @@
+.overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(28,16,9,0.92);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000; opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.overlay.visible { opacity: 1; pointer-events: all; }
+.overlay-box {
+  max-width: 520px; width: 90%;
+  background: var(--parchment); padding: 48px 52px; text-align: center;
+  position: relative;
+}
+.overlay-box::before {
+  content: ''; position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid var(--sepia-light); pointer-events: none;
+}
+.overlay-icon { font-size: 3rem; margin-bottom: 16px; }
+.overlay-title {
+  font-family: 'Cinzel', serif; font-size: 1.6rem;
+  color: var(--crimson); margin-bottom: 12px;
+}
+.overlay-text {
+  font-size: 1.05rem; line-height: 1.7; color: var(--ink-light);
+  font-style: italic; margin-bottom: 24px;
+}
+
+/* Game Over — distinct from special event */
+#overlay-gameover .overlay-box {
+  background: #1a0a08;
+  border: 2px solid var(--crimson);
+}
+#overlay-gameover .overlay-box::before {
+  border-color: rgba(180,40,40,0.3);
+}
+#overlay-gameover .overlay-title {
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 20px rgba(180,40,40,0.5);
+  color: #c03030;
+}
+#overlay-gameover .overlay-text {
+  color: rgba(232,201,122,0.7);
+}
+.gameover-svg {
+  display: block; margin: 0 auto 20px;
+  width: 72px; height: 72px;
+  filter: drop-shadow(0 0 8px rgba(180,40,40,0.4));
+}
+
+/* ===== REFLEXIÓN DE ACTO ===== */
+.reflection-list {
+  padding-left: 0; margin: 0 0 8px 0; list-style: none;
+}
+.reflection-q {
+  font-size: 0.98rem; line-height: 1.65; color: var(--ink-light);
+  padding: 10px 0 10px 20px;
+  border-bottom: 1px dotted rgba(0,0,0,0.12);
+  position: relative;
+}
+.reflection-q::before {
+  content: '✦';
+  position: absolute; left: 0; top: 11px;
+  font-size: 0.6rem; color: var(--sepia);
+}
+.reflection-q:last-child { border-bottom: none; }
+
+/* ===== OVERLAY: PERSONAJE ===== */
+.overlay-character-box {
+  display: flex;
+  max-width: 820px;
+  width: 95%;
+  background: var(--parchment);
+  position: relative;
+  overflow: hidden;
+  min-height: 380px;
+}
+.overlay-character-box::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid var(--sepia-light);
+  pointer-events: none;
+  z-index: 2;
+}
+.char-portrait-col {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: linear-gradient(to bottom, #1a1005 60%, #2a1a08);
+  padding: 24px 20px 20px;
+  border-right: 2px solid var(--sepia);
+  position: relative;
+  min-height: 380px;
+}
+.char-portrait-frame {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+}
+.char-portrait-frame img {
+  max-height: 300px;
+  max-width: 210px;
+  width: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+}
+.char-portrait-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+.char-portrait-cargo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  color: var(--sepia);
+  text-align: center;
+  margin-top: 4px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+.char-dialogue-col {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  padding: 36px 40px 28px;
+}
+.char-dialogue-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.char-dialogue-quote {
+  font-family: 'IM Fell English', serif;
+  font-size: 5rem;
+  color: var(--sepia-light);
+  line-height: 0.6;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+.char-dialogue-text {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--ink);
+  font-style: italic;
+  flex: 1;
+  margin-bottom: 28px;
+}
+.char-dialogue-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--sepia-light);
+  padding-top: 16px;
+}
+.char-dialogue-counter {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  color: var(--sepia);
+  letter-spacing: 0.14em;
+}
+.char-dialogue-btn {
+  min-width: 160px;
+  padding: 10px 20px;
+  font-size: 0.7rem;
+}
+@media (max-width: 640px) {
+  .overlay-character-box {
+    flex-direction: column;
+    max-height: 92vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .char-portrait-col {
+    flex: 0 0 auto;
+    flex-direction: row;
+    min-height: auto;
+    padding: 16px;
+    gap: 14px;
+    border-right: none;
+    border-bottom: 2px solid var(--sepia);
+  }
+  .char-portrait-frame { flex: 0 0 90px; }
+  .char-portrait-frame img { max-height: 110px; max-width: 90px; }
+  .char-portrait-name { font-size: 0.75rem; }
+  .char-dialogue-col { padding: 20px 20px 16px; }
+  .char-dialogue-quote { font-size: 3rem; }
+  .char-dialogue-text { font-size: 0.95rem; }
+}
+
+/* ===== FINAL SCREEN — ACTA COLONIAL ===== */

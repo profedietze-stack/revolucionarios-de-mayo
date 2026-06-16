@@ -1,0 +1,13 @@
+{
+  "name": "Revolucionarios de Mayo",
+  "short_name": "Rev. de Mayo",
+  "description": "Juego educativo sobre la Revolución de Mayo de 1810",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#1c1009",
+  "theme_color": "#1c1009",
+  "lang": "es-AR",
+  "categories": ["education", "games"]
+}

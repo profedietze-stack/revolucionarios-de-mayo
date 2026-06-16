@@ -1,0 +1,38 @@
+.tt {
+  position: relative;
+  display: inline;
+  border-bottom: 1px dotted var(--sepia);
+  color: inherit;
+  cursor: help;
+}
+.tt::after {
+  content: attr(data-tt);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a0f00;
+  border: 1px solid var(--sepia);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--sepia-pale);
+  line-height: 1.45;
+  width: max-content;
+  max-width: min(280px, 80vw);
+  white-space: normal;
+  text-align: left;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+}
+.tt.tt-below::after { bottom: auto; top: calc(100% + 8px); }
+.tt.tt-left::after  { left: auto; right: 0; transform: none; }
+.tt.tt-right::after { left: 0; transform: none; }
+.tt.tt-open::after,
+.tt:hover::after    { opacity: 1; }
+</style>

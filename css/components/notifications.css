@@ -1,0 +1,76 @@
+.notification {
+  position: fixed; top: 20px; right: 20px;
+  background: var(--navy); color: var(--sepia-pale);
+  padding: 12px 20px; z-index: 2000;
+  font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.1em;
+  border-left: 4px solid var(--sepia);
+  animation: notif-in 0.3s ease, notif-out 0.3s ease 2.7s forwards;
+  max-width: 280px;
+}
+@keyframes notif-in { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes notif-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* ===== STAT DELTA TOAST ===== */
+.stat-delta-toast {
+  position: fixed;
+  left: 240px; /* sidebar width */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  pointer-events: none;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 0 20px;
+}
+.stat-delta {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 8px 18px;
+  border-left: 3px solid currentColor;
+  background: rgba(28,16,9,0.88);
+  backdrop-filter: blur(4px);
+  animation: delta-rise 2.2s ease forwards;
+  white-space: nowrap;
+}
+.stat-delta.positive { color: #a8d878; border-color: #a8d878; }
+.stat-delta.negative { color: #e07070; border-color: #e07070; }
+.stat-delta.neutral  { color: var(--sepia-pale); border-color: var(--sepia-pale); }
+@keyframes delta-rise {
+  0%   { opacity: 0; transform: translateY(14px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  70%  { opacity: 1; transform: translateY(-8px); }
+  100% { opacity: 0; transform: translateY(-28px); }
+}
+@media (max-width: 768px) {
+  .stat-delta-toast { left: 0; top: auto; bottom: 160px; transform: none; width: 100%; padding: 0 16px; }
+}
+
+/* ===== SAVE TOAST ===== */
+#save-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(26,42,74,0.94);
+  color: var(--sepia-pale);
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 7px 22px;
+  border: 1px solid rgba(232,201,122,0.35);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+#save-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+#save-toast.save-toast-ok  { color: #a8d878; border-color: rgba(168,216,120,0.4); }
+#save-toast.save-toast-err { color: #e07070; border-color: rgba(224,112,112,0.4); }
+
+/* ===== ACT TRANSITION OVERLAY ===== */

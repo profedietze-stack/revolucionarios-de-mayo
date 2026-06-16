@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1c1009">
+<meta name="description" content="Juego educativo sobre la Revolución de Mayo de 1810">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rev. de Mayo">
+<link rel="manifest" href="manifest.json">
+<title>Revolucionarios de Mayo</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Audio: Web Audio API puro -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/screens/splash.css">
+<link rel="stylesheet" href="css/screens/menu.css">
+<link rel="stylesheet" href="css/screens/game.css">
+<link rel="stylesheet" href="css/components/overlays.css">
+<link rel="stylesheet" href="css/screens/final.css">
+<link rel="stylesheet" href="css/screens/stats.css">
+<link rel="stylesheet" href="css/screens/manual.css">
+<link rel="stylesheet" href="css/components/notifications.css">
+<link rel="stylesheet" href="css/components/transitions.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/components/tooltips.css">
+<link rel="stylesheet" href="css/components/modal.css">
+</head>
+<body>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="screen-splash">
+  <div class="splash-particles" id="splash-particles"></div>
+  <div class="splash-container" style="position:relative;z-index:1;">
+    <div class="splash-seal">
+      <div class="splash-seal-ring">
+        <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="55" cy="55" r="52" stroke="rgba(197,154,64,0.25)" stroke-width="1" stroke-dasharray="4 6"/>
+          <circle cx="55" cy="55" r="46" stroke="rgba(197,154,64,0.12)" stroke-width="0.5" stroke-dasharray="2 8"/>
+        </svg>
+      </div>
+      <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+        <circle cx="55" cy="55" r="48" stroke="rgba(197,154,64,0.35)" stroke-width="1.5"/>
+        <circle cx="55" cy="55" r="42" stroke="rgba(197,154,64,0.18)" stroke-width="0.8"/>
+        <ellipse cx="55" cy="55" rx="26" ry="30" stroke="rgba(197,154,64,0.5)" stroke-width="1.2" fill="rgba(26,42,74,0.6)"/>
+        <circle cx="55" cy="45" r="9" fill="rgba(197,154,64,0.7)"/>
+        <line x1="55" y1="32" x2="55" y2="29" stroke="rgba(197,154,64,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="55" y1="61" x2="55" y2="64" stroke="rgba(197,154,64,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="42" y1="45" x2="39" y2="45" stroke="rgba(197,154,64,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="68" y1="45" x2="71" y2="45" stroke="rgba(197,154,64,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="46" y1="36" x2="44" y2="34" stroke="rgba(197,154,64,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="64" y1="36" x2="66" y2="34" stroke="rgba(197,154,64,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="46" y1="54" x2="44" y2="56" stroke="rgba(197,154,64,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="64" y1="54" x2="66" y2="56" stroke="rgba(197,154,64,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M34 72 Q45 62 55 75 Q65 62 76 72" stroke="rgba(197,154,64,0.45)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M38 76 Q49 66 55 79 Q61 66 72 76" stroke="rgba(197,154,64,0.25)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+        <text x="55" y="92" text-anchor="middle" font-size="7" fill="rgba(197,154,64,0.4)" font-family="serif">✦ ✦ ✦</text>
+      </svg>
+    </div>
+    <div class="splash-eyebrow">Virreinato del Río de la Plata · 1810</div>
+    <div class="splash-title">REVOLUCIONARIOS<span class="splash-title-de">— DE —</span>MAYO</div>
+    <div class="splash-subtitle">Un juego histórico sobre la Revolución de Mayo</div>
+    <div class="splash-divider"><span class="splash-divider-gem">✦ ✦ ✦</span></div>
+    <div class="splash-progress-wrap">
+      <div class="splash-progress-label" id="splash-progress-label">INICIANDO</div>
+      <div class="splash-progress-track">
+        <div class="splash-progress-fill" id="splash-progress-fill"></div>
+      </div>
+      <div class="splash-progress-step" id="splash-progress-step">Preparando el Buenos Aires de 1810…</div>
+    </div>
+    <div class="splash-creator">Creado por &nbsp;·&nbsp; ProfeD.</div>
+    <button class="splash-btn" id="splash-btn" onclick="splashBegin()" disabled>
+      <span id="splash-btn-text">Cargando…</span>
+    </button>
+  </div>
+</div>
+
+<!-- ===== SCREEN: MENU ===== -->
+<div id="screen-menu" class="screen hidden">
+  <button class="menu-fullscreen" onclick="toggleFullscreen()">⛶ PANTALLA COMPLETA</button>
+  <div class="menu-container ornate-border parchment-bg">
+    <div class="menu-ornament">✦ ✦ ✦</div>
+    <h1 class="menu-title">REVOLUCIONARIOS<br>DE MAYO</h1>
+    <div class="menu-subtitle-line"></div>
+    <p class="menu-subtitle">"Seamos libres y lo demás no importa"</p>
+    <p class="menu-author">— Mariano Moreno, 1810</p>
+    <div class="menu-date-badge">BUENOS AIRES · MAYO 1810</div>
+    <p class="menu-desc">
+      Un juego de aventura histórica. Asume el rol de un mensajero secreto en los días más decisivos
+      de la historia argentina. Cada elección moldea la revolución. <em>¿Cuál será tu legado?</em>
+    </p>
+    <button class="btn btn-primary" onclick="startNewGame()"><span>✦ INICIAR NUEVA PARTIDA</span></button>
+    <button class="btn" id="btn-load" onclick="loadGame()" title="No hay partida guardada aún"><span>⟳ CARGAR PARTIDA</span></button>
+    <button class="btn btn-gold" onclick="showStats()"><span>🏆 LOGROS & ESTADÍSTICAS</span></button>
+    <button class="btn btn-gold" onclick="showManual()"><span>📜 MANUAL DIDÁCTICO</span></button>
+    <p style="font-size:0.75rem;color:var(--sepia);margin-top:20px;font-style:italic;">Creado por ProfeD. · Uso educativo libre</p>
+  </div>
+</div>
+
+<!-- ===== SCREEN: GAME ===== -->
+<div id="screen-game" class="screen hidden">
+  <div class="game-sidebar" id="game-sidebar">
+    <button class="sidebar-toggle" style="display:none" onclick="toggleSidebar()">
+      <span id="sidebar-toggle-label">📊 ESTADÍSTICAS</span>
+      <span class="sidebar-toggle-arrow">▼</span>
+    </button>
+    <div class="sidebar-inner-content">
+    <div class="sidebar-title">REVOLUCIONARIOS DE MAYO</div>
+    <div class="player-name" id="sidebar-player">Mensajero</div>
+    <div class="stat-block">
+      <div class="stat-label">PRESTIGIO <span class="stat-value" id="stat-prestigio-val">50</span><span style="font-size:0.55rem;opacity:0.5">/150</span></div>
+      <div class="stat-bar"><div class="stat-fill prestigio" id="bar-prestigio" style="width:50%"></div></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-label">RIESGO <span class="stat-value" id="stat-riesgo-val">15/150</span></div>
+      <div class="stat-bar"><div class="stat-fill riesgo" id="bar-riesgo" style="width:10%"></div></div>
+      <div id="riesgo-warning" style="display:none;font-size:0.6rem;color:#ff6b6b;font-style:italic;margin-top:3px;letter-spacing:0.05em;">⚠ ¡ZONA DE PELIGRO!</div>
+      <div id="riesgo-acto"></div>
+    </div>
+    <div class="progress-block">
+      <div class="progress-label">PROGRESO</div>
+      <div class="progress-text" id="progress-text">Evento 1 / 45</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:3%"></div></div>
+    </div>
+    <div class="act-indicator" id="act-indicator">Acto I: La Tensión</div>
+    <div class="mobile-act-badge">
+      <div class="mobile-act-badge-num" id="mobile-act-num">I</div>
+      <div class="mobile-act-badge-label" id="mobile-act-label">TENSIÓN</div>
+    </div>
+    <div class="logros-section">
+      <div class="logros-title">LOGROS DESBLOQUEADOS</div>
+      <div id="logros-list"></div>
+    </div>
+    <div class="save-indicator" id="save-indicator">—</div>
+    </div>
+  </div>
+  <div class="game-main">
+    <div class="game-header">
+      <span class="game-header-title">REVOLUCIONARIOS DE MAYO</span>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="game-btn-menu" id="audio-toggle-btn" onclick="AudioEngine.toggleMute()" title="Silenciar/Activar audio">🔊</button>
+        <button class="game-btn-menu" onclick="goToMenuFromGame()">◀ MENÚ</button>
+      </div>
+    </div>
+    <div class="narrative-area" id="narrative-area">
+      <div class="event-title" id="event-title"></div>
+      <div class="event-subtitle" id="event-subtitle"></div>
+      <div id="narrative-content"></div>
+    </div>
+    <div class="choices-area">
+      <div class="choices-title">— ELIGE TU ACCIÓN —</div>
+      <div id="choices-container"></div>
+    </div>
+    <div class="frase-del-dia" id="frase-del-dia"></div>
+  </div>
+  <div id="danger-vignette"></div>
+</div>
+
+<!-- ===== SCREEN: FINAL — ACTA COLONIAL ===== -->
+<div id="screen-final" class="screen hidden">
+  <div class="acta-documento" id="acta-documento">
+
+    <!-- Corner ornaments -->
+    <div class="acta-corner tl">✦</div>
+    <div class="acta-corner tr">✦</div>
+    <div class="acta-corner bl">✦</div>
+    <div class="acta-corner br">✦</div>
+
+    <!-- Encabezado -->
+    <div class="acta-corona">✦ &nbsp; Virreinato del Río de la Plata &nbsp; · &nbsp; Buenos Aires &nbsp; ✦</div>
+    <div class="acta-titulo-principal">ACTA DE PARTICIPACIÓN<br>REVOLUCIONARIA</div>
+    <div class="acta-subtitulo">Registro Oficial de la Primera Junta de Gobierno · Año 1810</div>
+    <div class="acta-divider-mayor"><span class="acta-divider-gem">✦ ✦ ✦</span></div>
+
+    <!-- Preámbulo -->
+    <p class="acta-parrafo intro">
+      En la ciudad de Buenos Aires, capital del ex-Virreinato del Río de la Plata, en el año del Señor de mil ochocientos diez, la Primera Junta de Gobierno hace constar, para memoria de las generaciones venideras, la participación documentada del ciudadano cuyo nombre y legado se detallan a continuación.
+    </p>
+
+    <!-- Nombre -->
+    <div class="acta-considerando">I. &nbsp; Identidad del Mensajero</div>
+    <div class="acta-nombre-bloque">
+      <div class="acta-nombre-label">Consta en este acta el nombre de</div>
+      <div class="acta-nombre" id="acta-nombre-display">—</div>
+      <div class="acta-nombre-cargo">Mensajero de la Revolución de Mayo · Agente de la Primera Junta</div>
+    </div>
+
+    <div class="acta-divider-menor"></div>
+
+    <!-- Score / sello -->
+    <div class="acta-considerando">II. &nbsp; Evaluación de Méritos</div>
+    <div class="acta-sello-bloque">
+      <div class="acta-sello-fecha" id="acta-fecha-display">—</div>
+      <div class="acta-sello-medalla">
+        <div class="acta-sello-medal-icon" id="acta-medal-icon">🥉</div>
+        <div class="acta-sello-medal-text" id="acta-medal-text">BRONCE</div>
+      </div>
+      <div class="acta-sello-datos">
+        <div class="acta-sello-score-label">PUNTUACIÓN FINAL</div>
+        <div>
+          <span class="acta-sello-score-num" id="acta-score-num">0</span>
+          <span class="acta-sello-score-max"> / 1000</span>
+        </div>
+        <div class="acta-sello-stats" id="acta-stats-line">—</div>
+      </div>
+    </div>
+    <p class="acta-parrafo">
+      La puntuación refleja la suma ponderada de prestigio acumulado, riesgo asumido con prudencia, logros obtenidos durante la misión y conocimiento histórico demostrado. Una puntuación superior a 800 equivale a distinción de Oro; superior a 600, a Plata; el resto, reconocimiento en Bronce.
+    </p>
+
+    <div class="acta-divider-menor"></div>
+
+    <!-- Epílogo narrativo -->
+    <div class="acta-considerando">III. &nbsp; Crónica del Destino</div>
+    <div id="acta-epilogo-container"></div>
+
+    <div class="acta-divider-menor"></div>
+
+    <!-- Decisiones clave -->
+    <div class="acta-considerando">IV. &nbsp; Decisiones de Registro Histórico</div>
+    <p class="acta-parrafo">
+      La Junta ha tomado nota de las siguientes decisiones que el mensajero adoptó en momentos críticos de la revolución, y que definen su carácter histórico:
+    </p>
+    <div id="acta-decisiones-container"></div>
+
+    <div class="acta-divider-menor"></div>
+
+    <!-- Logros -->
+    <div class="acta-considerando">V. &nbsp; Logros y Distinciones</div>
+    <p class="acta-parrafo">
+      En reconocimiento a las conductas y acciones que excedieron el deber ordinario del mensajero, la Primera Junta otorga las siguientes distinciones. Las marcadas en oscuro permanecen bloqueadas por no haber sido alcanzadas en esta partida.
+    </p>
+    <div class="acta-logros-grid" id="acta-logros-container"></div>
+
+    <div class="acta-divider-menor"></div>
+
+    <!-- Historia real vs. jugador -->
+    <div class="acta-considerando">VI. &nbsp; Contraste con el Registro Histórico</div>
+    <p class="acta-parrafo">
+      A continuación se consignan los hechos verificados por la historiografía junto a la forma en que el mensajero intervino en ellos, según consta en las decisiones registradas durante la partida:
+    </p>
+    <div id="acta-historia-container"></div>
+
+    <div class="acta-divider-menor"></div>
+
+    <!-- Firma -->
+    <div class="acta-firma-bloque">
+      <div class="acta-firma-col">
+        <div class="acta-firma-linea"></div>
+        <div class="acta-firma-label">Presidente de la Primera Junta</div>
+        <div class="acta-firma-valor">Cornelio Saavedra</div>
+      </div>
+      <div class="acta-firma-col">
+        <div class="acta-firma-linea"></div>
+        <div class="acta-firma-label">Secretario de la Primera Junta</div>
+        <div class="acta-firma-valor">Mariano Moreno</div>
+      </div>
+      <div class="acta-firma-col">
+        <div class="acta-firma-linea"></div>
+        <div class="acta-firma-label">Registro Educativo</div>
+        <div class="acta-firma-valor">ProfeD.</div>
+      </div>
+    </div>
+
+    <div class="acta-pie">
+      ✦ &nbsp; REVOLUCIONARIOS DE MAYO &nbsp; · &nbsp; CREADO POR PROFD. &nbsp; · &nbsp; MAYO DE 1810 &nbsp; · &nbsp; USO EDUCATIVO LIBRE &nbsp; ✦
+    </div>
+  </div>
+
+  <!-- Botones bajo el acta -->
+  <div class="acta-botones">
+    <button class="btn btn-primary" onclick="restartGame()"><span>↺ REINICIAR JUEGO</span></button>
+    <button class="btn btn-captura" onclick="abrirCaptura()"><span>📸 PREPARAR PARA DOCENTE</span></button>
+    <button class="btn" onclick="showMenu()"><span>◀ VOLVER AL MENÚ</span></button>
+  </div>
+</div>
+
+<!-- ===== OVERLAY: CAPTURA PARA DOCENTE ===== -->
+<div id="overlay-captura">
+  <div class="captura-instruccion" id="captura-instruccion-top">
+    ✦ &nbsp; COMPROBANTE PARA EL DOCENTE &nbsp; ✦
+  </div>
+
+  <div class="captura-card" id="captura-card">
+    <div class="cap-header">
+      <div class="cap-eyebrow">Revolucionarios de Mayo · ProfeD.</div>
+      <div class="cap-titulo">COMPROBANTE DE PARTIDA</div>
+      <div class="cap-subtitulo">Revolución de Mayo de 1810</div>
+    </div>
+    <div class="cap-divider"></div>
+
+    <div class="cap-nombre-bloque">
+      <div class="cap-certifica">Certifica la participación de</div>
+      <div class="cap-nombre" id="cap-nombre">—</div>
+      <div class="cap-cargo">Mensajero Revolucionario · Primera Junta de Gobierno</div>
+    </div>
+    <div class="cap-divider"></div>
+
+    <div class="cap-score-row">
+      <div class="cap-medalla-bloque">
+        <div class="cap-medalla-icon" id="cap-medal">🥉</div>
+        <div class="cap-medalla-text" id="cap-medal-label">BRONCE</div>
+      </div>
+      <div class="cap-score-bloque">
+        <div class="cap-score-label">PUNTUACIÓN FINAL</div>
+        <div>
+          <span class="cap-score-num" id="cap-score">0</span>
+          <span class="cap-score-max"> / 1000</span>
+        </div>
+      </div>
+      <div class="cap-stats-bloque">
+        <div class="cap-stat-row">
+          <span class="cap-stat-label">Prestigio</span>
+          <span class="cap-stat-val" id="cap-prestigio">—</span>
+        </div>
+        <div class="cap-stat-row">
+          <span class="cap-stat-label">Riesgo</span>
+          <span class="cap-stat-val" id="cap-riesgo">—</span>
+        </div>
+        <div class="cap-stat-row">
+          <span class="cap-stat-label">Eventos</span>
+          <span class="cap-stat-val">45 / 45</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cap-logros-bloque">
+      <div class="cap-logros-titulo">LOGROS OBTENIDOS</div>
+      <div class="cap-logros-lista" id="cap-logros">—</div>
+    </div>
+
+    <div class="cap-decisions-bloque">
+      <div class="cap-dec-titulo">DECISIONES CLAVE</div>
+      <div id="cap-decisions">—</div>
+    </div>
+
+    <div class="cap-divider"></div>
+    <div class="cap-pie" id="cap-pie-fecha">
+      REVOLUCIONARIOS DE MAYO · PROFD. · PARTIDA COMPLETADA
+    </div>
+  </div>
+
+  <div class="captura-botones">
+    <button class="btn btn-download" onclick="descargarCaptura()"><span>⬇ DESCARGAR IMAGEN</span></button>
+    <button class="btn" onclick="cerrarCaptura()"><span>← VOLVER AL ACTA</span></button>
+  </div>
+  <div class="captura-instruccion manual-hint" id="captura-hint" style="display:none;">
+    Si la descarga no funciona, tomá una captura de pantalla con tu dispositivo<br>
+    (Windows: Win+Shift+S · Mac: Cmd+Shift+4 · Móvil: botón lateral + volumen)
+  </div>
+</div>
+
+<!-- ===== SCREEN: STATS & LOGROS ===== -->
+<div id="screen-stats" class="screen hidden">
+  <div class="stats-container">
+    <div class="stats-header">
+      <div class="stats-eyebrow">✦ &nbsp; PRIMERA JUNTA DE GOBIERNO &nbsp; ✦</div>
+      <div class="stats-title">LOGROS & ESTADÍSTICAS</div>
+      <div class="stats-subtitle">Registro Completo del Mensajero</div>
+    </div>
+    <div class="stats-divider"><span>✦ ✦ ✦</span></div>
+
+    <!-- Contadores globales -->
+    <div class="stats-section">
+      <div class="stats-section-header">I. &nbsp; RESUMEN GENERAL</div>
+      <div class="stats-section-body">
+        <div class="stats-cards" id="stats-cards">
+          <div class="stats-card"><div class="stats-card-num" id="sc-partidas">0</div><div class="stats-card-label">PARTIDAS COMPLETADAS</div></div>
+          <div class="stats-card"><div class="stats-card-num" id="sc-perdidas">0</div><div class="stats-card-label">PARTIDAS PERDIDAS</div></div>
+          <div class="stats-card"><div class="stats-card-num" id="sc-mejor">—</div><div class="stats-card-label">MEJOR PUNTAJE</div></div>
+          <div class="stats-card"><div class="stats-card-num" id="sc-medallas">—</div><div class="stats-card-label">MEDALLAS GANADAS</div></div>
+          <div class="stats-card"><div class="stats-card-num" id="sc-logros">0</div><div class="stats-card-label">LOGROS TOTALES</div></div>
+          <div class="stats-card"><div class="stats-card-num" id="sc-tiempo">0'</div><div class="stats-card-label">TIEMPO TOTAL DE JUEGO</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logros -->
+    <div class="stats-section">
+      <div class="stats-section-header">II. &nbsp; TODOS LOS LOGROS &nbsp; <span id="stats-logros-count" style="opacity:0.5;font-weight:normal;"></span></div>
+      <div class="stats-section-body">
+        <div class="logros-full-grid" id="stats-logros-grid"></div>
+      </div>
+    </div>
+
+    <!-- Historial -->
+    <div class="stats-section">
+      <div class="stats-section-header">III. &nbsp; HISTORIAL DE PARTIDAS</div>
+      <div class="stats-section-body">
+        <div id="stats-historial"></div>
+      </div>
+    </div>
+
+    <!-- Evaluación docente -->
+    <div class="stats-section">
+      <div class="stats-section-header">IV. &nbsp; EVALUACIÓN PARA EL DOCENTE</div>
+      <div class="stats-section-body">
+        <div class="eval-grid" id="stats-eval-grid"></div>
+        <div class="eval-note">
+          ★ Esta sección está pensada para que el docente evalúe el desempeño del estudiante.
+          Consultá el <strong>Manual Didáctico → Pestaña "Pedagogía" → Sección E</strong> para los criterios de evaluación recomendados y la rúbrica de uso docente.
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-footer-btns">
+      <button class="btn" onclick="resetStats()" style="border-color:var(--crimson);color:var(--crimson);max-width:220px;"><span>🗑 BORRAR HISTORIAL</span></button>
+      <button class="btn btn-primary" onclick="showMenu()"><span>◀ VOLVER AL MENÚ</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: MANUAL ===== -->
+<div id="screen-manual" class="screen hidden">
+  <div class="manual-container">
+    <div class="manual-header">
+      <div class="final-ornament">✦ MANUAL DIDÁCTICO ✦</div>
+      <h1 class="manual-title">Revolucionarios de Mayo</h1>
+      <p class="manual-version">Guía Educativa para Docentes y Estudiantes · v1.0</p>
+    </div>
+    <div class="manual-tabs">
+      <button class="manual-tab active" onclick="switchTab('tab-desc', this)">Descripción</button>
+      <button class="manual-tab" onclick="switchTab('tab-peda', this)">Pedagogía</button>
+      <button class="manual-tab" onclick="switchTab('tab-activ', this)">Actividades</button>
+      <button class="manual-tab" onclick="switchTab('tab-hist', this)">Hechos Históricos</button>
+      <button class="manual-tab" onclick="switchTab('tab-glosario', this)">Glosario</button>
+    </div>
+    <!-- TAB 1 -->
+    <div class="tab-content active" id="tab-desc">
+      <h2 class="manual-h2">¿Qué es "Revolucionarios de Mayo"?</h2>
+      <p class="manual-p">Un juego educativo interactivo tipo "Elige tu propia aventura" que sumerge al estudiante en la Revolución de Mayo de 1810. El jugador asume el rol de un mensajero secreto que participa activamente en los eventos previos y durante el levantamiento revolucionario en Buenos Aires.</p>
+      <div class="manual-box-gold">
+        <p class="manual-p" style="margin:0"><em>"El juego no reemplaza la historia: la hace sentir. El conocimiento que se vive, se recuerda."</em></p>
+      </div>
+      <h2 class="manual-h2">Objetivos Pedagógicos Primarios</h2>
+      <ul class="manual-ul">
+        <li><strong>Comprensión histórica:</strong> Entender el contexto, motivaciones y actores principales de la Revolución de Mayo.</li>
+        <li><strong>Pensamiento crítico:</strong> Analizar decisiones complejas con múltiples perspectivas y consecuencias.</li>
+        <li><strong>Empatía histórica:</strong> Vivenciar los dilemas morales y políticos de los revolucionarios.</li>
+        <li><strong>Ciudadanía:</strong> Conectar la historia con la importancia de la participación cívica actual.</li>
+        <li><strong>Alfabetismo narrativo:</strong> Navegar narrativas complejas en formato digital interactivo.</li>
+      </ul>
+      <h2 class="manual-h2">Objetivos Secundarios</h2>
+      <ul class="manual-ul">
+        <li>Conocer figuras históricas clave: Moreno, Castelli, Belgrano, Saavedra, Vieytes, Liniers.</li>
+        <li>Reconocer fuentes de información y sesgos en narrativas históricas.</li>
+        <li>Desarrollar inteligencia emocional mediante conflictos morales ficticios pero históricamente situados.</li>
+        <li>Practicar escritura reflexiva sobre decisiones de alto impacto.</li>
+      </ul>
+      <h2 class="manual-h2">¿A qué edad es apropiado?</h2>
+      <ul class="manual-ul">
+        <li><strong>Recomendado:</strong> Estudiantes de 14 a 18 años (educación secundaria).</li>
+        <li><strong>Flexible:</strong> Puede adaptarse para estudiantes de 12+ con mediación docente.</li>
+        <li><strong>Avanzado:</strong> Útil en cursos universitarios de Historia y Ciencias Políticas.</li>
+      </ul>
+      <h2 class="manual-h2">Duración y Modalidad</h2>
+      <ul class="manual-ul">
+        <li>Primera partida completa: 60 a 75 minutos.</li>
+        <li>Partidas posteriores (otras decisiones): 45 a 55 minutos.</li>
+        <li>Recomendación: Una partida por sesión de clase doble, con reflexión posterior de 20 minutos.</li>
+        <li>Puede jugarse individual, en parejas o en grupos pequeños (recomendado: parejas).</li>
+      </ul>
+    </div>
+    <!-- TAB 2 -->
+    <div class="tab-content" id="tab-peda">
+      <h2 class="manual-h2">A. Antes del Juego — Activación de Conocimientos (15 min)</h2>
+      <div class="manual-box">
+        <h3 class="manual-h3">Actividad Disparadora</h3>
+        <p class="manual-p">Mostrar imagen de la Plaza de Mayo en 1810. Preguntas de disparador:</p>
+        <ul class="manual-ul">
+          <li>¿Qué creen que pasó aquí el 25 de mayo de 1810?</li>
+          <li>¿Quién tomaba decisiones en Buenos Aires en esa época?</li>
+          <li>¿Cómo se comunicaban los revolucionarios sin internet?</li>
+          <li>¿Qué significa ser un "mensajero secreto" en tiempos de revolución?</li>
+        </ul>
+      </div>
+      <h3 class="manual-h3">Contexto Histórico Mínimo (10 min)</h3>
+      <ul class="manual-ul">
+        <li>España estaba ocupada por Napoleón desde 1808 — el rey Fernando VII, prisionero.</li>
+        <li>El Virrey gobernaba Buenos Aires bajo presión política creciente.</li>
+        <li>Había una élite criolla que quería mayor autonomía o independencia.</li>
+        <li>Existía carestía de alimentos y tensión social en la ciudad.</li>
+        <li>Las noticias de Europa tardaban semanas o meses en llegar.</li>
+      </ul>
+      <div class="manual-box-gold">
+        <p class="manual-p" style="margin:0"><strong>Nota para Docentes:</strong> No sobrexpliques. Deja que el juego revele la historia con el drama que merece. La sorpresa narrativa tiene valor pedagógico.</p>
+      </div>
+      <h2 class="manual-h2">B. Durante el Juego — Rol del Docente</h2>
+      <h3 class="manual-h3">Observación Activa</h3>
+      <ul class="manual-ul">
+        <li>Mientras los estudiantes juegan, observa sus decisiones.</li>
+        <li>Toma notas sobre patrones: ¿quién elige violencia? ¿quién elige cautela? ¿quién prioriza el grupo?</li>
+        <li>Registra decisiones que generan controversia o debate entre compañeros.</li>
+      </ul>
+      <h3 class="manual-h3">Intervenciones Estratégicas</h3>
+      <ul class="manual-ul">
+        <li><strong>Si un estudiante está atrapado:</strong> Sugiere que piense en las consecuencias de cada opción a largo plazo.</li>
+        <li><strong>Si alguien toma una decisión que genera Game Over:</strong> No interrumpas. Déjalo experimentar y reflexionar.</li>
+        <li><strong>Si termina rápido:</strong> Sugiere una segunda partida eligiendo exactamente lo opuesto en cada decisión.</li>
+      </ul>
+      <h3 class="manual-h3">Pausas Reflexivas Recomendadas</h3>
+      <ul class="manual-ul">
+        <li><strong>Evento 10 (Cabildo Abierto):</strong> "¿Qué piensas del argumento revolucionario? ¿Qué hubieras hecho tú?"</li>
+        <li><strong>Evento 18 (Traidor Descubierto):</strong> "¿Qué es la justicia en una revolución? ¿Puede haber juicio justo?"</li>
+        <li><strong>Evento 22 (Conspiración):</strong> "¿Cuándo está justificado actuar fuera de la ley para proteger un bien mayor?"</li>
+      </ul>
+      <h2 class="manual-h2">C. Después del Juego — Reflexión Profunda (20–30 min)</h2>
+      <div class="manual-box">
+        <h3 class="manual-h3">Preguntas Guía para el Aula</h3>
+        <ul class="manual-ul" style="margin:0">
+          <li>¿Cuál fue la decisión más difícil que tomaste? ¿Por qué?</li>
+          <li>¿Cómo se sintió tener responsabilidad sobre eventos que afectan a muchos?</li>
+          <li>¿Hubo momentos donde te arrepentiste de una decisión anterior?</li>
+          <li>¿Qué hubiera hecho tú en la realidad si fueras Mariano Moreno o Belgrano?</li>
+          <li>¿Qué conexiones ves entre 1810 y la democracia argentina actual?</li>
+          <li>¿Cómo el miedo y la moral influyeron en tus elecciones dentro del juego?</li>
+        </ul>
+      </div>
+      <h2 class="manual-h2">D. Comprobante de Participación para el Docente</h2>
+      <p class="manual-p">Al finalizar la partida, el estudiante llega a la pantalla de <strong>Acta de Participación Revolucionaria</strong>. Allí encontrará el botón <strong>"📸 Preparar para Docente"</strong>, que genera una ficha compacta con nombre, puntaje, medalla, logros y decisiones clave. El estudiante puede descargarla como imagen o tomar captura de pantalla y enviarla al docente como prueba de que jugó.</p>
+      <div class="manual-box-gold">
+        <p class="manual-p" style="margin:0"><strong>Sugerencia:</strong> Pedí a los estudiantes que te envíen la captura antes de la discusión en clase. Usala como punto de partida: "¿Por qué tomaste esa decisión en el Evento 18?" El comprobante incluye las decisiones clave registradas.</p>
+      </div>
+      <h2 class="manual-h2">E. Uso de "Logros & Estadísticas" para Evaluación Docente</h2>
+      <p class="manual-p">El botón <strong>"🏆 Logros & Estadísticas"</strong> del menú principal abre una pantalla con el historial completo de todas las partidas jugadas en ese dispositivo. La sección <em>"IV. Evaluación para el Docente"</em> resume automáticamente los datos más relevantes:</p>
+      <div class="manual-box">
+        <ul class="manual-ul" style="margin:0">
+          <li><strong>Última partida:</strong> puntaje, medalla y fecha de la sesión más reciente.</li>
+          <li><strong>Mejor puntaje:</strong> el máximo alcanzado en todas las partidas.</li>
+          <li><strong>Promedio de puntaje:</strong> desempeño global a lo largo de todas las sesiones.</li>
+          <li><strong>Tasa de éxito:</strong> porcentaje de partidas completadas vs. partidas perdidas por Game Over.</li>
+          <li><strong>Nivel estimado:</strong> Avanzado (≥800), Intermedio (≥600) o En desarrollo (el resto).</li>
+          <li><strong>Dominio de logros:</strong> cuántos de los 12 logros disponibles desbloqueó el estudiante en total.</li>
+          <li><strong>Tiempo total jugado:</strong> suma acumulada de todas las sesiones en ese dispositivo.</li>
+        </ul>
+      </div>
+      <div class="manual-box-gold">
+        <p class="manual-p" style="margin:0"><strong>Rúbrica orientativa sugerida:</strong> Puntaje ≥800 = Desempeño destacado; 600–799 = Satisfactorio; 300–599 = En proceso; &lt;300 = Requiere acompañamiento. Complementar siempre con la reflexión escrita u oral del estudiante. El puntaje mide estrategia, no conocimiento memorístico.</p>
+      </div>
+      <p class="manual-p">Los datos se almacenan localmente en el navegador del estudiante. Si el estudiante juega desde dispositivos distintos, los historiales serán independientes. Para evaluación en aula de informática, solicitá la captura del comprobante (Sección D) como evidencia portátil.</p>
+    </div>
+    <!-- TAB 3 -->
+    <div class="tab-content" id="tab-activ">
+      <h2 class="manual-h2">Actividad 1: "Dilema Moral Revolucionario" (45 min)</h2>
+      <p class="manual-p"><strong>Objetivo:</strong> Entender la complejidad moral de la revolución.</p>
+      <div class="manual-box">
+        <ul class="manual-ul" style="margin:0">
+          <li>Dividir la clase en 4 grupos. Asignar a cada uno un dilema del juego (Eventos 3, 13, 18, 22).</li>
+          <li>Cada grupo debate: ¿Cuál es la decisión ética? ¿La práctica? ¿La política?</li>
+          <li>Presentaciones de 5 minutos cada grupo, seguidas de plenaria.</li>
+          <li><strong>Extensión:</strong> Conectar con dilemas contemporáneos de activismo y desobediencia civil.</li>
+        </ul>
+      </div>
+      <h2 class="manual-h2">Actividad 2: "Reescribir la Historia" (60 min)</h2>
+      <p class="manual-p"><strong>Objetivo:</strong> Pensar causalmente y contrafácticamente sobre la historia.</p>
+      <div class="manual-box">
+        <ul class="manual-ul" style="margin:0">
+          <li>Grupos eligen 3 decisiones del juego que consideran "puntos de inflexión".</li>
+          <li>Escriben: "Si hubiera sucedido lo contrario, la historia sería..."</li>
+          <li>Comparan con lo que realmente ocurrió.</li>
+          <li><strong>Producto final:</strong> Informe de 1 a 2 páginas sobre causalidad histórica.</li>
+        </ul>
+      </div>
+      <h2 class="manual-h2">Actividad 3: "Debate del Cabildo Abierto" (90 min, 2 clases)</h2>
+      <p class="manual-p"><strong>Objetivo:</strong> Roleplay histórico, desarrollo de oratoria y argumentación.</p>
+      <div class="manual-box">
+        <ul class="manual-ul" style="margin:0">
+          <li>Asignar roles: Saavedra, Moreno, Castelli, Liniers, un comerciante realista, una mujer criolla, un sacerdote, un artesano.</li>
+          <li>Recrear el Cabildo Abierto del 22 de mayo con discursos preparados.</li>
+          <li>Votación final ficticia y reflexión comparativa con el resultado histórico real.</li>
+          <li><strong>Variante:</strong> Incluir argumentos históricos documentados mezclados con inventados — ¿pueden identificar cuáles son cuáles?</li>
+        </ul>
+      </div>
+      <h2 class="manual-h2">Actividad 4: "Análisis de Fuentes Primarias" (45 min)</h2>
+      <p class="manual-p"><strong>Objetivo:</strong> Conectar el juego con documentos históricos reales.</p>
+      <div class="manual-box">
+        <ul class="manual-ul" style="margin:0">
+          <li>Proporcionar fragmentos de: la Gaceta de Buenos Aires, cartas de Belgrano, documentos de la Primera Junta.</li>
+          <li>Estudiantes identifican: perspectiva, sesgo, alineación con el juego.</li>
+          <li>Debate: ¿Cómo construimos narrativas históricas? ¿Quién decide qué es "histórico"?</li>
+        </ul>
+      </div>
+      <h2 class="manual-h2">Actividad 5: "Mi Diario de Revolucionario" (Tarea)</h2>
+      <p class="manual-p"><strong>Objetivo:</strong> Escritura reflexiva y empatía histórica.</p>
+      <div class="manual-box">
+        <ul class="manual-ul" style="margin:0">
+          <li>Tres entradas de diario: "Mi primer día como mensajero" (Eventos 1-2), "La noche antes del Cabildo" (Eventos 9-11), "Mi reflexión final" (Evento 45).</li>
+          <li>Cada entrada: 200 a 300 palabras. Incluir emociones, conflictos morales, perspectivas.</li>
+          <li>Opcional: leer algunas en clase como fuente "primaria" ficticia.</li>
+        </ul>
+      </div>
+      <h2 class="manual-h2">Actividad 6: "Conectar 1810 con Hoy" (30 min)</h2>
+      <p class="manual-p"><strong>Objetivo:</strong> Actualizar la historia y desarrollar pensamiento crítico cívico.</p>
+      <div class="manual-box">
+        <ul class="manual-ul" style="margin:0">
+          <li>¿Qué luchas por libertad e igualdad observamos hoy en Argentina y el mundo?</li>
+          <li>Comparar formas de represión de 1810 con restricciones actuales a la libertad de expresión.</li>
+          <li>Pregunta final: "¿Eres un revolucionario de tu tiempo? ¿En qué sentido?"</li>
+        </ul>
+      </div>
+    </div>
+    <!-- TAB 4 -->
+    <div class="tab-content" id="tab-hist">
+      <h2 class="manual-h2">¿Es todo el juego históricamente preciso?</h2>
+      <p class="manual-p">El juego combina hechos históricos verificados con ficción educativa deliberada. A continuación, la distinción clara:</p>
+      <h3 class="manual-h3"><span class="fact-true">✓</span> Lo que es HISTÓRICAMENTE REAL</h3>
+      <ul class="manual-ul">
+        <li>La Revolución de Mayo de 1810 ocurrió entre el 18 y el 25 de mayo.</li>
+        <li>El Cabildo Abierto fue celebrado el 22 de mayo de 1810 en Buenos Aires.</li>
+        <li>Se formó la Primera Junta de Gobierno con 9 miembros el 25 de mayo.</li>
+        <li>Mariano Moreno fue Secretario de la Primera Junta.</li>
+        <li>Cornelio Saavedra fue designado Presidente.</li>
+        <li>Juan José Castelli fue un orador revolucionario clave y "tribuno" de la revolución.</li>
+        <li>La Jabonería de Hipólito Vieytes fue un lugar de reunión y conspiración real.</li>
+        <li>Existían tensiones reales entre criollos y peninsulares (españoles nacidos en España).</li>
+        <li>Liniers fue ex-Virrey que resistió a la revolución y fue ejecutado en Córdoba.</li>
+        <li>Existían redes de espionaje de ambos lados — realistas y patriotas.</li>
+        <li>La Gaceta de Buenos Aires fue fundada por Moreno como órgano de prensa revolucionario.</li>
+        <li>Manuel Belgrano fue figura central del movimiento patriota.</li>
+      </ul>
+      <h3 class="manual-h3"><span class="fact-false">?</span> Lo que es FICCIÓN EDUCATIVA</h3>
+      <ul class="manual-ul">
+        <li>El protagonista (el jugador) es un personaje ficticio, aunque representativo de muchos patriotas anónimos.</li>
+        <li>Algunos detalles específicos de eventos son composiciones de múltiples situaciones históricas.</li>
+        <li>El sistema de "Prestigio y Riesgo" es una simplificación pedagógica de realidades complejas.</li>
+        <li>Algunas opciones de decisión imaginan "qué hubiera pasado si..." para abrir el debate.</li>
+      </ul>
+      <div class="manual-box-gold">
+        <p class="manual-p" style="margin:0"><strong>Propósito Pedagógico:</strong> El juego prioriza la comprensión emocional y moral sobre la precisión documental absoluta. Las ficciones educativas sirven para hacer la historia "jugable", permitir experiencias de dilemas reales y crear empatía con actores históricos concretos.</p>
+      </div>
+      <h3 class="manual-h3">Lecturas Complementarias Recomendadas</h3>
+      <ul class="manual-ul">
+        <li>"Mariano Moreno: el sabio de la revolución" — Adolfo Saldías.</li>
+        <li>"El Río de la Plata en el Siglo XVIII" — John Lynch.</li>
+        <li>Documentos de la Primera Junta — Disponibles en el Archivo General de la Nación.</li>
+        <li>"Breve Historia de Argentina" — José Luis Romero.</li>
+        <li>Gaceta de Buenos Aires, edición facsimilar — disponible en bibliotecas nacionales.</li>
+      </ul>
+    </div>
+    <!-- TAB 5: GLOSARIO -->
+    <div class="tab-content" id="tab-glosario">
+      <!-- populated by buildGlosario() in manual.js -->
+    </div>
+    <div style="margin-top:32px; border-top:1px solid var(--parchment-deep); padding-top:20px;">
+      <button class="btn btn-primary" onclick="showMenu()" style="max-width:300px;margin:0 auto;display:block;"><span>◀ VOLVER AL MENÚ</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STAT DELTA TOAST CONTAINER ===== -->
+<div class="stat-delta-toast" id="stat-delta-toast"></div>
+
+<!-- ===== SAVE TOAST ===== -->
+<div id="save-toast" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ===== OVERLAY: ACT TRANSITION ===== -->
+<div id="overlay-act">
+  <div class="act-transition-inner" id="act-transition-inner">
+    <!-- populated by JS -->
+  </div>
+</div>
+
+<!-- ===== OVERLAY: GAME OVER ===== -->
+<div class="overlay" id="overlay-gameover">
+  <div class="overlay-box">
+    <svg class="gameover-svg" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+      <!-- Broken wax seal / colonial stamp -->
+      <circle cx="36" cy="36" r="30" fill="none" stroke="#7a1c1c" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="36" cy="36" r="24" fill="rgba(122,28,28,0.15)" stroke="#7a1c1c" stroke-width="1"/>
+      <!-- Chain links broken -->
+      <path d="M20 28 Q24 24 28 28 Q32 32 28 36 Q24 40 20 36 Q16 32 20 28Z" fill="none" stroke="#b83a3a" stroke-width="1.5"/>
+      <path d="M44 36 Q48 32 52 36 Q56 40 52 44 Q48 48 44 44 Q40 40 44 36Z" fill="none" stroke="#b83a3a" stroke-width="1.5"/>
+      <line x1="28" y1="32" x2="34" y2="32" stroke="#7a1c1c" stroke-width="1.5"/>
+      <line x1="38" y1="40" x2="44" y2="40" stroke="#7a1c1c" stroke-width="1.5"/>
+      <!-- Break in chain -->
+      <line x1="33" y1="30" x2="36" y2="34" stroke="#b83a3a" stroke-width="2" stroke-linecap="round"/>
+      <line x1="36" y1="38" x2="39" y2="42" stroke="#b83a3a" stroke-width="2" stroke-linecap="round"/>
+      <!-- Crown broken -->
+      <path d="M26 22 L30 18 L36 22 L42 18 L46 22 L44 26 L28 26 Z" fill="none" stroke="rgba(180,40,40,0.6)" stroke-width="1.2"/>
+      <line x1="36" y1="20" x2="36" y2="26" stroke="rgba(180,40,40,0.4)" stroke-width="0.8"/>
+    </svg>
+    <div class="overlay-title">FUE DESCUBIERTO</div>
+    <div class="overlay-text" id="gameover-text">La Policía del Virrey te ha arrestado. Tu participación en la revolución terminó antes de tiempo. La historia continúa sin ti.</div>
+    <button class="btn btn-primary" onclick="restartGame()" style="margin-bottom:10px;border-color:#7a1c1c;background:#7a1c1c;"><span>↺ INTENTAR DE NUEVO</span></button>
+    <button class="btn" onclick="goMenuFromGameOver()" style="border-color:rgba(180,40,40,0.4);color:rgba(232,201,122,0.6);"><span>◀ VOLVER AL MENÚ</span></button>
+  </div>
+</div>
+
+<!-- ===== OVERLAY: PERSONAJE ===== -->
+<div class="overlay" id="overlay-character">
+  <div class="overlay-character-box">
+    <div class="char-portrait-col">
+      <div class="char-portrait-frame">
+        <img id="char-portrait-img" src="" alt="">
+      </div>
+      <div class="char-portrait-name" id="char-portrait-name"></div>
+      <div class="char-portrait-cargo" id="char-portrait-cargo"></div>
+    </div>
+    <div class="char-dialogue-col">
+      <div class="char-dialogue-inner">
+        <div class="char-dialogue-quote">"</div>
+        <div class="char-dialogue-text" id="char-dialogue-text"></div>
+        <div class="char-dialogue-footer">
+          <span class="char-dialogue-counter" id="char-dialogue-counter"></span>
+          <button class="btn btn-primary char-dialogue-btn" onclick="charDialogueNext()">
+            <span id="char-dialogue-btn-text">SIGUIENTE →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OVERLAY: REFLEXIÓN DE ACTO ===== -->
+<div class="overlay" id="overlay-reflection">
+  <div class="overlay-box" style="max-width:600px;text-align:left;">
+    <div class="overlay-icon" style="text-align:center;">📖</div>
+    <div class="overlay-title" id="reflection-title" style="text-align:center;font-size:1.2rem;"></div>
+    <div class="overlay-text" id="reflection-intro" style="text-align:center;margin-bottom:16px;"></div>
+    <ul id="reflection-questions" class="reflection-list"></ul>
+    <button class="btn btn-primary" onclick="closeReflection()" style="margin-top:8px;display:block;width:100%;"><span id="reflection-btn-text">Continuar</span></button>
+  </div>
+</div>
+
+<!-- ===== OVERLAY: SPECIAL EVENT ===== -->
+<div class="overlay" id="overlay-special">
+  <div class="overlay-box">
+    <div class="overlay-icon">⭐</div>
+    <div class="overlay-title" id="special-title">EVENTO ESPECIAL</div>
+    <div class="overlay-text" id="special-text"></div>
+    <button class="btn btn-primary" onclick="closeSpecial()"><span>CONTINUAR</span></button>
+  </div>
+</div>
+
+
+<!-- Modal de nombre — reemplaza prompt() para no romper fullscreen -->
+<div id="name-modal" class="name-modal">
+  <div class="name-modal-box">
+    <div class="name-modal-crest">⚜</div>
+    <h2 class="name-modal-title">Mensajero de la Revolución</h2>
+    <p class="name-modal-sub">¿Cuál es tu nombre?</p>
+    <input id="name-modal-input" class="name-modal-input" type="text" maxlength="40" placeholder="Tu nombre…" />
+    <div id="name-modal-error" class="name-modal-error">El nombre debe tener al menos 3 caracteres.</div>
+    <button id="name-modal-btn" class="name-modal-btn">Comenzar</button>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS — orden de dependencia ===== -->
+<script src="data/quotes.js"></script>
+<script src="data/achievements.js"></script>
+<script src="data/events.js"></script>
+<script src="data/acts.js"></script>
+<script src="data/tooltips.js"></script>
+<script src="data/characters.js"></script>
+<script src="engine/audio.js"></script>
+<script src="engine/state.js"></script>
+<script src="engine/ui.js"></script>
+<script src="engine/stats.js"></script>
+<script src="engine/game.js"></script>
+<script src="screens/splash.js"></script>
+<script src="screens/final.js"></script>
+<script src="screens/manual.js"></script>
+<script src="engine/debug.js"></script>
+<script src="engine/sw-register.js"></script>
+</body>
+</html>

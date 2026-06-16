@@ -1,0 +1,174 @@
+#overlay-act {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--ink);
+  display: flex; align-items: flex-start; justify-content: center;
+  z-index: 1500; opacity: 0; pointer-events: none;
+  transition: opacity 0.7s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 40px 16px 60px;
+}
+#overlay-act.visible { opacity: 1; pointer-events: all; }
+
+.act-transition-inner {
+  max-width: 760px; width: 100%;
+  padding: 50px 56px;
+  text-align: center;
+  position: relative;
+  border: 1px solid rgba(197,154,64,0.25);
+  box-shadow: 0 0 0 1px rgba(197,154,64,0.08), inset 0 0 60px rgba(0,0,0,0.4);
+  animation: act-fadein 1.2s ease both;
+  flex-shrink: 0;
+}
+@keyframes act-fadein {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  #overlay-act { padding: 20px 12px 40px; }
+  .act-transition-inner { padding: 28px 20px; }
+  .act-trans-columns { grid-template-columns: 1fr !important; gap: 16px; }
+  .act-trans-title { font-size: clamp(1.4rem, 6vw, 2rem) !important; }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .act-transition-inner { padding: 36px 32px; }
+  .act-trans-columns { grid-template-columns: 1fr 1fr !important; gap: 16px; }
+}
+
+.act-roman {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem; color: rgba(197,154,64,0.5);
+  letter-spacing: 0.4em; text-transform: uppercase;
+  margin-bottom: 18px;
+  animation: act-fadein 1.4s ease both;
+}
+.act-trans-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700; color: var(--sepia-pale);
+  line-height: 1.1; letter-spacing: 0.05em;
+  text-shadow: 0 0 40px rgba(197,154,64,0.3);
+  margin-bottom: 6px;
+  animation: act-fadein 1.6s ease both;
+}
+.act-trans-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic; font-size: 1.1rem;
+  color: rgba(197,154,64,0.6);
+  margin-bottom: 32px;
+  animation: act-fadein 1.8s ease both;
+}
+.act-trans-divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 28px 0;
+  animation: act-fadein 2s ease both;
+}
+.act-trans-divider::before,
+.act-trans-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197,154,64,0.4), transparent);
+}
+.act-trans-divider-gem {
+  color: var(--sepia); font-size: 0.9rem; letter-spacing: 6px;
+}
+
+.act-trans-columns {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px; margin-bottom: 28px;
+  animation: act-fadein 2.2s ease both;
+}
+.act-trans-col-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem; color: var(--sepia);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(197,154,64,0.2);
+}
+.act-trans-col-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; color: rgba(232,201,122,0.75);
+  line-height: 1.75; text-align: left;
+}
+
+.act-trans-narrative {
+  font-family: 'IM Fell English', serif;
+  font-size: 1.05rem; color: rgba(232,201,122,0.85);
+  line-height: 1.9; text-align: center;
+  font-style: italic;
+  margin-bottom: 28px;
+  animation: act-fadein 2.4s ease both;
+}
+
+/* Consejo/guia box — solo Acto I */
+.act-guide-box {
+  background: rgba(197,154,64,0.07);
+  border: 1px solid rgba(197,154,64,0.2);
+  padding: 20px 24px; text-align: left;
+  margin-bottom: 28px;
+  animation: act-fadein 2.6s ease both;
+}
+.act-guide-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem; color: var(--sepia);
+  letter-spacing: 0.2em; margin-bottom: 12px;
+}
+.act-guide-items {
+  list-style: none; padding: 0; margin: 0;
+}
+.act-guide-items li {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.92rem; color: rgba(232,201,122,0.8);
+  line-height: 1.6; margin-bottom: 8px;
+  padding-left: 18px; position: relative;
+}
+.act-guide-items li::before {
+  content: '✦'; position: absolute; left: 0;
+  color: var(--sepia); font-size: 0.6rem; top: 4px;
+}
+
+.act-trans-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.15em;
+  padding: 14px 40px;
+  background: transparent;
+  border: 2px solid var(--sepia);
+  color: var(--sepia-pale);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+  animation: act-fadein 2.8s ease both;
+}
+.act-trans-btn::before {
+  content: ''; position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: var(--sepia); transition: left 0.3s ease; z-index: 0;
+}
+.act-trans-btn:hover::before { left: 0; }
+.act-trans-btn:hover { color: var(--ink); }
+.act-trans-btn span { position: relative; z-index: 1; }
+
+/* Floating particles */
+.act-particle {
+  position: absolute; pointer-events: none;
+  width: 2px; height: 2px;
+  background: var(--sepia);
+  border-radius: 50%;
+  animation: particle-float linear infinite;
+  opacity: 0;
+}
+@keyframes particle-float {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--parchment-dark); }
+::-webkit-scrollbar-thumb { background: var(--sepia); }
+

@@ -1,0 +1,494 @@
+#screen-final {
+  background-color: #c8b89a;
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgba(139,105,20,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(100,60,20,0.12) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  overflow-y: auto;
+  padding: 40px 20px 60px;
+}
+
+/* The acta document itself */
+.acta-documento {
+  max-width: 820px;
+  margin: 0 auto;
+  background-color: var(--parchment);
+  background-image:
+    radial-gradient(ellipse at 20% 5%, rgba(198,158,70,0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 95%, rgba(139,60,20,0.07) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  padding: 56px 64px;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(28,16,9,0.35), 0 2px 8px rgba(28,16,9,0.2);
+  /* triple border acta */
+  border: 3px solid var(--sepia);
+}
+.acta-documento::before {
+  content: ''; position: absolute;
+  top: 10px; left: 10px; right: 10px; bottom: 10px;
+  border: 1px solid var(--sepia-light);
+  pointer-events: none;
+}
+.acta-documento::after {
+  content: ''; position: absolute;
+  top: 16px; left: 16px; right: 16px; bottom: 16px;
+  border: 1px solid rgba(197,154,64,0.3);
+  pointer-events: none;
+}
+
+/* Corner ornaments */
+.acta-corner {
+  position: absolute;
+  font-family: 'Cinzel', serif;
+  color: var(--sepia-light);
+  font-size: 1.1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+.acta-corner.tl { top: 22px; left: 22px; }
+.acta-corner.tr { top: 22px; right: 22px; }
+.acta-corner.bl { bottom: 22px; left: 22px; }
+.acta-corner.br { bottom: 22px; right: 22px; }
+
+/* Acta header */
+.acta-corona {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem; color: var(--sepia);
+  letter-spacing: 0.35em; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.acta-titulo-principal {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-weight: 700; color: var(--navy);
+  text-align: center; line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-shadow: 1px 1px 0 rgba(197,154,64,0.25);
+  margin-bottom: 4px;
+}
+.acta-subtitulo {
+  font-family: 'IM Fell English', serif;
+  font-style: italic; font-size: 1rem;
+  color: var(--sepia); text-align: center;
+  margin-bottom: 0;
+}
+.acta-divider-mayor {
+  display: flex; align-items: center; gap: 14px;
+  margin: 20px 0;
+}
+.acta-divider-mayor::before,
+.acta-divider-mayor::after {
+  content: ''; flex: 1; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--sepia-light), transparent);
+}
+.acta-divider-gem { font-family: 'Cinzel', serif; color: var(--sepia); font-size: 0.9rem; letter-spacing: 6px; }
+
+.acta-divider-menor {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--parchment-deep), transparent);
+  margin: 24px 0;
+}
+
+/* Acta body text style */
+.acta-considerando {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem; color: var(--sepia);
+  letter-spacing: 0.25em; text-transform: uppercase;
+  margin-bottom: 10px; margin-top: 28px;
+  display: flex; align-items: center; gap: 12px;
+}
+.acta-considerando::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--parchment-deep), transparent);
+}
+
+/* Nombre del participante — firma estilo */
+.acta-nombre-bloque {
+  text-align: center; margin: 10px 0 20px;
+}
+.acta-nombre-label {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  color: rgba(139,105,20,0.6); letter-spacing: 0.3em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.acta-nombre {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--navy);
+  line-height: 1.1;
+}
+.acta-nombre-cargo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; color: var(--sepia);
+  font-style: italic; margin-top: 4px;
+}
+
+/* Score sello */
+.acta-sello-bloque {
+  display: flex; gap: 0; margin: 28px 0;
+  border: 2px solid var(--sepia);
+  position: relative;
+}
+.acta-sello-medalla {
+  background: var(--navy);
+  padding: 24px 28px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-width: 110px;
+  border-right: 2px solid var(--sepia);
+}
+.acta-sello-medal-icon { font-size: 2.8rem; line-height: 1; margin-bottom: 4px; }
+.acta-sello-medal-text {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  color: var(--sepia-pale); letter-spacing: 0.2em;
+}
+.acta-sello-datos {
+  flex: 1; padding: 20px 24px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.acta-sello-score-label {
+  font-family: 'Cinzel', serif; font-size: 0.58rem;
+  color: var(--sepia); letter-spacing: 0.2em; margin-bottom: 4px;
+}
+.acta-sello-score-num {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 700; color: var(--navy);
+  line-height: 1; letter-spacing: -0.02em;
+}
+.acta-sello-score-max {
+  font-family: 'Cinzel', serif; font-size: 0.7rem;
+  color: var(--parchment-deep); letter-spacing: 0.1em;
+}
+.acta-sello-stats {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; color: var(--ink-light);
+  font-style: italic; margin-top: 8px;
+}
+.acta-sello-fecha {
+  position: absolute; top: -1px; right: -1px;
+  background: var(--sepia); color: var(--parchment);
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  letter-spacing: 0.12em; padding: 3px 10px;
+}
+
+/* Párrafos de acta */
+.acta-parrafo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; line-height: 1.9;
+  color: var(--ink-light);
+  margin-bottom: 14px;
+  text-align: justify;
+}
+.acta-parrafo.intro { font-style: italic; }
+.acta-parrafo strong { color: var(--ink); font-weight: 600; }
+
+/* Decisiones como artículos de acta */
+.acta-articulo {
+  display: flex; gap: 14px; align-items: flex-start;
+  margin-bottom: 12px; padding: 10px 14px;
+  background: rgba(26,42,74,0.03);
+  border-left: 3px solid var(--parchment-deep);
+  transition: border-color 0.2s;
+}
+.acta-articulo:hover { border-left-color: var(--sepia-light); }
+.acta-art-num {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  background: var(--navy); color: var(--sepia-pale);
+  padding: 3px 7px; white-space: nowrap;
+  margin-top: 2px; flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+.acta-art-texto {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.98rem; line-height: 1.55;
+  color: var(--ink-light);
+}
+.acta-art-texto em { color: var(--sepia); }
+
+/* Logros como sellos */
+.acta-logros-grid {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 4px;
+}
+.acta-logro {
+  padding: 7px 13px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; color: var(--ink-light);
+  border: 1px solid var(--parchment-deep);
+  background: var(--parchment-dark);
+  position: relative;
+}
+.acta-logro.earned {
+  background: rgba(197,154,64,0.12);
+  border-color: var(--sepia-light);
+  color: var(--ink);
+}
+.acta-logro.earned::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--sepia-light);
+}
+.acta-logro.locked { opacity: 0.45; font-style: italic; }
+
+/* Historia comparison */
+.acta-hist-item {
+  margin-bottom: 14px; padding-left: 20px; position: relative;
+}
+.acta-hist-item::before {
+  content: '§'; position: absolute; left: 0; top: 1px;
+  color: var(--sepia-light); font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+}
+.acta-hist-real {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.98rem; color: var(--ink); line-height: 1.5;
+  font-weight: 500;
+}
+.acta-hist-jugador {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.92rem; color: var(--sepia);
+  font-style: italic; margin-top: 3px; padding-left: 16px;
+  border-left: 2px solid var(--parchment-deep);
+  line-height: 1.5;
+}
+
+/* Firma final del acta */
+.acta-firma-bloque {
+  margin-top: 36px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 20px; flex-wrap: wrap;
+}
+.acta-firma-col { text-align: center; flex: 1; min-width: 160px; }
+.acta-firma-linea {
+  height: 1px; background: var(--ink-light);
+  margin-bottom: 6px;
+}
+.acta-firma-label {
+  font-family: 'Cinzel', serif; font-size: 0.58rem;
+  color: var(--sepia); letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.acta-firma-valor {
+  font-family: 'IM Fell English', serif;
+  font-style: italic; font-size: 0.95rem;
+  color: var(--ink-light); margin-top: 2px;
+}
+
+.acta-pie {
+  text-align: center; margin-top: 32px;
+  font-family: 'Cinzel', serif; font-size: 0.58rem;
+  color: rgba(139,105,20,0.5); letter-spacing: 0.25em;
+}
+
+/* Buttons below acta */
+.acta-botones {
+  max-width: 820px; margin: 28px auto 0;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.acta-botones .btn { flex: 1; min-width: 180px; }
+/* Doble clase (.btn.btn-captura) sube especificidad sobre .btn base — sin !important */
+.btn.btn-captura {
+  border-color: var(--sepia);
+  color: var(--sepia);
+  font-weight: 700;
+}
+.btn.btn-captura::before { background: var(--sepia); }
+.btn.btn-captura:hover { color: var(--parchment); }
+
+/* ===== OVERLAY: CAPTURA DOCENTE ===== */
+#overlay-captura {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(28,16,9,0.95);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 2000; opacity: 0; pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 20px;
+  overflow-y: auto;
+}
+#overlay-captura.visible { opacity: 1; pointer-events: all; }
+
+.captura-instruccion {
+  color: rgba(232,201,122,0.6);
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  letter-spacing: 0.2em; text-align: center;
+  margin-bottom: 16px;
+}
+.captura-instruccion.manual-hint {
+  margin-top: 14px; font-size: 0.6rem;
+  color: rgba(232,201,122,0.4);
+}
+
+/* The compact certificate card */
+.captura-card {
+  width: 100%; max-width: 620px;
+  background-color: var(--parchment);
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(198,158,70,0.12) 0%, transparent 60%);
+  padding: 36px 40px;
+  position: relative;
+  border: 3px solid var(--sepia);
+  box-shadow: 0 0 0 6px rgba(197,154,64,0.15), 0 12px 40px rgba(0,0,0,0.6);
+  flex-shrink: 0;
+}
+.captura-card::before {
+  content: ''; position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid var(--sepia-light); pointer-events: none;
+}
+.captura-card::after {
+  content: ''; position: absolute;
+  top: 14px; left: 14px; right: 14px; bottom: 14px;
+  border: 1px solid rgba(197,154,64,0.25); pointer-events: none;
+}
+
+.cap-header { text-align: center; margin-bottom: 18px; }
+.cap-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  color: var(--sepia); letter-spacing: 0.35em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.cap-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.1; letter-spacing: 0.04em;
+}
+.cap-subtitulo {
+  font-family: 'IM Fell English', serif;
+  font-style: italic; font-size: 0.88rem;
+  color: var(--sepia); margin-top: 4px;
+}
+
+.cap-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--sepia-light), transparent);
+  margin: 14px 0;
+}
+
+.cap-nombre-bloque { text-align: center; margin: 10px 0 14px; }
+.cap-certifica {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  color: rgba(139,105,20,0.55); letter-spacing: 0.3em; margin-bottom: 5px;
+}
+.cap-nombre {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  color: var(--navy); line-height: 1.1;
+}
+.cap-cargo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.88rem; color: var(--sepia);
+  font-style: italic; margin-top: 3px;
+}
+
+.cap-score-row {
+  display: flex; align-items: stretch; gap: 0;
+  border: 2px solid var(--sepia); margin: 16px 0;
+}
+.cap-medalla-bloque {
+  background: var(--navy); padding: 14px 18px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  border-right: 2px solid var(--sepia);
+  min-width: 80px;
+}
+.cap-medalla-icon { font-size: 2rem; line-height: 1; }
+.cap-medalla-text {
+  font-family: 'Cinzel', serif; font-size: 0.5rem;
+  color: var(--sepia-pale); letter-spacing: 0.15em; margin-top: 3px;
+}
+.cap-score-bloque {
+  flex: 1; padding: 12px 16px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.cap-score-label {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  color: var(--sepia); letter-spacing: 0.2em; margin-bottom: 2px;
+}
+.cap-score-num {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700; color: var(--navy); line-height: 1;
+}
+.cap-score-max {
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  color: var(--parchment-deep);
+}
+.cap-stats-bloque {
+  padding: 12px 16px; border-left: 1px solid var(--parchment-deep);
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 6px; min-width: 120px;
+}
+.cap-stat-row {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem; color: var(--ink-light);
+  display: flex; justify-content: space-between; gap: 8px;
+}
+.cap-stat-label { font-style: italic; }
+.cap-stat-val { font-weight: 600; color: var(--ink); }
+
+.cap-logros-bloque { margin: 12px 0; }
+.cap-logros-titulo {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  color: var(--sepia); letter-spacing: 0.2em; margin-bottom: 8px;
+}
+.cap-logros-lista {
+  display: flex; flex-wrap: wrap; gap: 5px;
+}
+.cap-logro-badge {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem; padding: 4px 9px;
+  background: rgba(197,154,64,0.12);
+  border: 1px solid var(--sepia-light);
+  color: var(--ink);
+}
+
+.cap-decisions-bloque { margin: 12px 0; }
+.cap-dec-titulo {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  color: var(--sepia); letter-spacing: 0.2em; margin-bottom: 8px;
+}
+.cap-dec-item {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem; color: var(--ink-light);
+  line-height: 1.5; margin-bottom: 5px;
+  padding-left: 14px; position: relative;
+}
+.cap-dec-item::before {
+  content: '›'; position: absolute; left: 0;
+  color: var(--sepia); font-weight: bold;
+}
+.cap-dec-ev {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  background: var(--navy); color: var(--sepia-pale);
+  padding: 1px 5px; margin-right: 5px;
+  vertical-align: middle;
+}
+
+.cap-pie {
+  text-align: center; margin-top: 16px;
+  font-family: 'Cinzel', serif; font-size: 0.52rem;
+  color: rgba(139,105,20,0.5); letter-spacing: 0.2em;
+  border-top: 1px solid var(--parchment-deep); padding-top: 10px;
+}
+
+.captura-botones {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  justify-content: center; margin-top: 16px;
+  width: 100%; max-width: 620px;
+}
+.captura-botones .btn { flex: 1; min-width: 180px; }
+.btn.btn-download {
+  background: var(--sepia);
+  border-color: var(--sepia);
+  color: var(--parchment);
+  font-weight: 700;
+}
+.btn.btn-download::before { background: var(--sepia-light); }
+
+/* ===== STATS & LOGROS SCREEN ===== */

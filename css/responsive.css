@@ -1,0 +1,122 @@
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  #screen-game { flex-direction: column; }
+  .game-sidebar {
+    width: 100%; min-width: unset;
+    flex-direction: row; flex-wrap: wrap; gap: 12px;
+    padding: 12px 16px; border-right: none; border-bottom: 2px solid var(--sepia);
+  }
+  .sidebar-title, .player-name { width: 100%; margin-bottom: 4px; }
+  .stat-block { flex: 1; min-width: 120px; margin-bottom: 4px; }
+  .progress-block { flex: 1; min-width: 120px; margin-bottom: 4px; }
+  .logros-section { width: 100%; }
+  .narrative-area { padding: 20px 20px 16px; }
+  .choices-area { padding: 12px 20px 16px; }
+  .frase-del-dia { padding: 8px 20px; }
+  .menu-container { padding: 36px 28px; }
+  .manual-tabs { gap: 0; }
+  .manual-tab { padding: 8px 12px; font-size: 0.65rem; }
+}
+
+/* ===== NARROW MOBILE (≤600px) — barra compacta siempre visible ===== */
+@media (max-width: 600px) {
+  /* Sidebar → franja horizontal fija con stats siempre visibles */
+  .game-sidebar {
+    padding: 7px 12px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow: visible;
+    max-height: none;
+    align-items: center;
+    border-bottom: 2px solid var(--sepia);
+    border-right: none;
+    width: 100%;
+    min-width: unset;
+  }
+
+  /* Ocultar toggle — ya no se necesita */
+  .sidebar-toggle { display: none !important; }
+
+  /* Ocultar elementos no críticos durante la partida */
+  .sidebar-title,
+  .player-name,
+  .logros-section,
+  .save-indicator,
+  .act-indicator { display: none; }
+
+  /* Contenedor interior: fila compacta con las 4 piezas de info */
+  .sidebar-inner-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 0 10px;
+    width: 100%;
+    align-items: center;
+    padding: 0;
+    overflow: visible;
+  }
+
+  /* Cada stat-block ocupa una columna */
+  .stat-block {
+    margin-bottom: 0;
+    min-width: 0;
+  }
+  .stat-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+  .stat-value { font-size: 0.72rem; }
+  .stat-bar { height: 4px; }
+
+  /* Progress block en columna 3 */
+  .progress-block {
+    margin-bottom: 0;
+    min-width: 0;
+  }
+  .progress-label { font-size: 0.5rem; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .progress-text { font-size: 0.72rem; margin-bottom: 2px; }
+  .progress-bar { height: 3px; }
+
+  /* Indicador de acto: texto vertical comprimido, columna 4 */
+  .mobile-act-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(197,154,64,0.15);
+    border: 1px solid rgba(197,154,64,0.3);
+    padding: 3px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .mobile-act-badge-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: var(--sepia-pale);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .mobile-act-badge-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.55rem;
+    color: rgba(232,201,122,0.5);
+    line-height: 1;
+    margin-top: 1px;
+  }
+
+  /* Riesgo warning más pequeño */
+  #riesgo-warning { font-size: 0.5rem !important; margin-top: 2px; }
+
+  /* Contenido narrativo */
+  .narrative-area { padding: 14px 14px 10px; }
+  .choices-area { padding: 8px 14px 12px; }
+  .frase-del-dia { padding: 6px 14px; font-size: 0.76rem; }
+  .event-title { font-size: 1.05rem; }
+  .narrative-text { font-size: 0.97rem; }
+  .choice-btn { font-size: 0.9rem; padding: 9px 12px; }
+}
+
+/* ===== TOOLTIPS PEDAGÓGICOS ===== */
