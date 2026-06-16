@@ -1,38 +1,49 @@
 .tt {
-  position: relative;
   display: inline;
   border-bottom: 1px dotted var(--sepia);
   color: inherit;
-  cursor: help;
+  cursor: pointer;
 }
-.tt::after {
-  content: attr(data-tt);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1a0f00;
-  border: 1px solid var(--sepia);
-  border-radius: 4px;
-  padding: 8px 12px;
+
+/* ===== TOOLTIP MODAL ===== */
+#tt-modal {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(28,16,9,0.82);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9500; opacity: 0; pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+#tt-modal.visible { opacity: 1; pointer-events: all; }
+#tt-modal-box {
+  max-width: 460px; width: 92%;
+  background: var(--parchment);
+  padding: 36px 40px 32px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+#tt-modal-box::before {
+  content: ''; position: absolute;
+  top: 6px; left: 6px; right: 6px; bottom: 6px;
+  border: 1px solid var(--sepia-light); pointer-events: none;
+}
+#tt-modal-term {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem; color: var(--crimson);
+  margin-bottom: 14px; letter-spacing: 0.04em;
+}
+#tt-modal-def {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.82rem;
-  font-style: italic;
-  color: var(--sepia-pale);
-  line-height: 1.45;
-  width: max-content;
-  max-width: min(280px, 80vw);
-  white-space: normal;
-  text-align: left;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.18s ease;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+  font-size: 1rem; line-height: 1.7;
+  color: var(--ink); font-style: italic;
+  margin-bottom: 22px;
 }
-.tt.tt-below::after { bottom: auto; top: calc(100% + 8px); }
-.tt.tt-left::after  { left: auto; right: 0; transform: none; }
-.tt.tt-right::after { left: 0; transform: none; }
-.tt.tt-open::after,
-.tt:hover::after    { opacity: 1; }
-</style>
+#tt-modal-close {
+  display: block; width: 100%;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem; letter-spacing: 0.15em;
+  padding: 10px; cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--sepia);
+  color: var(--sepia); transition: all 0.2s ease;
+}
+#tt-modal-close:hover { background: var(--sepia); color: var(--ink); }

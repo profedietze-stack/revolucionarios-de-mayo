@@ -3,7 +3,7 @@
 // Cachea el app shell para uso offline. Subí CACHE_VERSION en
 // cada release para forzar actualización del cache.
 // ============================================================
-const CACHE_VERSION = 'rev-mayo-v12.3';
+const CACHE_VERSION = 'rev-mayo-v12.4';
 
 // Archivos críticos: si falta uno, cache.addAll() falla y el SW no instala.
 const APP_SHELL = [

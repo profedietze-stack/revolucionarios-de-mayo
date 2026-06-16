@@ -322,22 +322,45 @@ const TOOLTIP_COMPILED = (() => {
   for (const [term, defn] of TOOLTIP_DICT) {
     if (seen.has(term)) continue;
     seen.add(term);
-    out.push({
-      esc: escHtml(term),
-      prefix: '<span class="tt" data-tt="' + defn.replace(/"/g, '&quot;').replace(/'/g, '&#39;') + '">'
-    });
+    out.push({ term, esc: escHtml(term), defnEsc: defn.replace(/"/g, '&quot;').replace(/'/g, '&#39;') });
   }
   return out;
 })();
 
+// Split text by HTML tags, replace only in text segments (not inside < > or attributes).
 function applyTooltips(text) {
   let result = escHtml(text);
-  for (const { esc, prefix } of TOOLTIP_COMPILED) {
-    const idx = result.indexOf(esc);
-    if (idx === -1) continue;
-    result = result.slice(0, idx) + prefix + esc + '</span>' + result.slice(idx + esc.length);
+  for (const { esc, defnEsc } of TOOLTIP_COMPILED) {
+    // Split on HTML tags (keep delimiters). Even indices = text nodes, odd = tags.
+    const parts = result.split(/(<[^>]*>)/);
+    let replaced = false;
+    for (let i = 0; i < parts.length; i += 2) {
+      const idx = parts[i].indexOf(esc);
+      if (idx !== -1) {
+        parts[i] = parts[i].slice(0, idx)
+          + '<span class="tt" data-tt="' + defnEsc + '" onclick="openTooltipModal(this)">'
+          + esc + '</span>'
+          + parts[i].slice(idx + esc.length);
+        replaced = true;
+        break;
+      }
+    }
+    if (!replaced) continue;
+    result = parts.join('');
   }
   return result;
+}
+
+function openTooltipModal(el) {
+  const term = el.textContent;
+  const def  = el.getAttribute('data-tt');
+  document.getElementById('tt-modal-term').textContent = term;
+  document.getElementById('tt-modal-def').textContent  = def;
+  document.getElementById('tt-modal').classList.add('visible');
+}
+
+function closeTooltipModal() {
+  document.getElementById('tt-modal').classList.remove('visible');
 }
 
 // ============================================================

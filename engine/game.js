@@ -66,11 +66,10 @@ function renderEvent() {
   const ev = getEvent(GS.currentEvent);
   if (!ev) { endGame(); return; }
 
-  // Mostrar personaje UNA sola vez por evento (antes de las opciones)
+  // Mostrar personaje UNA sola vez por evento: personaje primero, evento después del diálogo.
   if (ev.showCharacter && !GS.seenCharacters.includes(ev.id)) {
     GS.seenCharacters.push(ev.id);
-    _doRenderEvent(ev);
-    showCharacter(ev.showCharacter.id, ev.showCharacter.ctx, null);
+    showCharacter(ev.showCharacter.id, ev.showCharacter.ctx, () => _doRenderEvent(ev));
     return;
   }
   _doRenderEvent(ev);
