@@ -31,4 +31,31 @@
   color: #fff8e7; border: none; border-radius: 6px;
   font-family: 'Cinzel', serif; font-size: 0.95rem;
   padding: 10px 32px; cursor: pointer; letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+.diff-selector {
+  display: flex; gap: 8px; margin-bottom: 16px;
+}
+.diff-card {
+  flex: 1; background: #0d0700; border: 1px solid #5a3e10;
+  border-radius: 8px; padding: 10px 8px; cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  text-align: center;
+}
+.diff-card:hover { border-color: #b8860b; background: #1a0f00; }
+.diff-card.diff-selected {
+  border-color: #d4af37; background: #1e1100;
+  box-shadow: 0 0 0 1px #d4af37;
+}
+.diff-name {
+  font-family: 'Cinzel', serif; font-size: 0.72rem;
+  color: #d4af37; letter-spacing: 0.05em; margin-bottom: 4px;
+}
+.diff-stats {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
+  color: #a08040; margin-bottom: 4px;
+}
+.diff-desc {
+  font-family: serif; font-size: 0.65rem; font-style: italic;
+  color: #7a6040;
 }

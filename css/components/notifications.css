@@ -10,6 +10,40 @@
 @keyframes notif-in { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes notif-out { from { opacity: 1; } to { opacity: 0; } }
 
+/* ===== LOGRO TOAST ===== */
+.logro-notif {
+  position: fixed; top: 20px; right: 20px; z-index: 3000;
+  background: linear-gradient(160deg, #1a0f00, #2d1a00);
+  border: 1px solid #d4af37;
+  border-left: 4px solid #d4af37;
+  border-radius: 8px;
+  padding: 14px 18px;
+  max-width: 320px;
+  box-shadow: 0 4px 24px rgba(212,175,55,0.25);
+  animation: logro-in 0.35s cubic-bezier(0.22,1,0.36,1);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.logro-notif.logro-notif-out { opacity: 0; transform: translateX(20px); }
+.logro-notif-header {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.18em; color: #d4af37;
+  margin-bottom: 10px;
+}
+.logro-notif-body { display: flex; align-items: flex-start; gap: 12px; }
+.logro-notif-icon { font-size: 2rem; line-height: 1; flex-shrink: 0; }
+.logro-notif-name {
+  font-family: 'Cinzel', serif; font-size: 0.8rem;
+  color: #f0e6c8; letter-spacing: 0.05em; margin-bottom: 4px;
+}
+.logro-notif-desc {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.75rem;
+  font-style: italic; color: #a08040; line-height: 1.4;
+}
+@keyframes logro-in {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
 /* ===== STAT DELTA TOAST ===== */
 .stat-delta-toast {
   position: fixed;

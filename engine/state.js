@@ -49,6 +49,7 @@ function migrateSave(raw) {
   if (typeof state.fraseIndex !== 'number' || isNaN(state.fraseIndex)) state.fraseIndex = 0;
   if (typeof state.leyoManual !== 'boolean') state.leyoManual = false;
   if (typeof state.maxRiesgoSuperado80 !== 'boolean') state.maxRiesgoSuperado80 = false;
+  if (!state.dificultad) state.dificultad = 'normal';
   return state;
 }
 
@@ -77,12 +78,20 @@ function checkLoadButton() {
   }
 }
 
+function selectDiff(card) {
+  document.querySelectorAll('.diff-card').forEach(c => c.classList.remove('diff-selected'));
+  card.classList.add('diff-selected');
+}
+
 function startNewGame() {
-  // Abre modal HTML — no interrumpe el fullscreen (prompt() sí lo hace)
   const modal = document.getElementById('name-modal');
   const input = document.getElementById('name-modal-input');
   const btn   = document.getElementById('name-modal-btn');
   input.value = '';
+  // Reset dificultad a normal
+  document.querySelectorAll('.diff-card').forEach(c => c.classList.remove('diff-selected'));
+  const normalCard = document.querySelector('.diff-card[data-diff="normal"]');
+  if (normalCard) normalCard.classList.add('diff-selected');
   modal.style.display = 'flex';
   setTimeout(() => input.focus(), 80);
 
@@ -102,23 +111,28 @@ function startNewGame() {
     const name = input.value.trim();
     if (name.length < 3) { showError(); return; }
     clearError();
+    const selected = document.querySelector('.diff-card.diff-selected');
+    const dificultad = selected ? selected.dataset.diff : 'normal';
     modal.style.display = 'none';
-    _initGame(name);
+    _initGame(name, dificultad);
   }
   input.oninput = () => { if (input.value.trim().length >= 3) clearError(); };
   btn.onclick = confirm;
   input.onkeydown = e => { if (e.key === 'Enter') confirm(); };
 }
 
-function _initGame(name) {
+function _initGame(name, dificultad) {
+  dificultad = dificultad || 'normal';
+  const DIFF_RIESGO = { facil: 15, normal: 30, dificil: 40 };
   GS = {
     currentEvent: 1,
     prestigio: 50,
-    riesgo: 15,
+    riesgo: DIFF_RIESGO[dificultad] || 30,
     logros: [],
     decisiones: [],
     puntuacion: 0,
     playerName: name,
+    dificultad: dificultad,
     gameStarted: true,
     gameEnded: false,
     finalType: "",

@@ -81,11 +81,12 @@ function _doRenderEvent(ev) {
 
   const nc = document.getElementById('narrative-content');
   nc.innerHTML = '';
+  const playerName = (GS && GS.playerName) ? GS.playerName : '';
   ev.narrative.forEach((p, i) => {
     const el = document.createElement('p');
     el.className = 'narrative-text' + (i === 0 ? ' first-paragraph' : '');
     el.style.animationDelay = (i * 0.1) + 's';
-    el.innerHTML = applyTooltips(p);
+    el.innerHTML = applyTooltips(playerName ? p.replace(/\{PLAYER\}/g, playerName) : p);
     nc.appendChild(el);
   });
 
@@ -120,14 +121,18 @@ function makeChoice(ev, idx) {
     return;
   }
 
-  // Apply stats
-  GS.prestigio = clamp(GS.prestigio + (ch.prest || 0), 0, PRESTIGIO_MAX);
-  GS.riesgo = clamp(GS.riesgo + (ch.riesgo || 0), 0, RIESGO_MAX);
-  GS.riesgoActo += (ch.riesgo || 0);
+  // Apply stats with difficulty multiplier
+  const DIFF_MULT = { facil: 0.75, normal: 1.0, dificil: 1.3 };
+  const mult = DIFF_MULT[GS.dificultad] || 1.0;
+  const dprest = Math.round((ch.prest || 0) * mult);
+  const driesgo = Math.round((ch.riesgo || 0) * mult);
+  GS.prestigio = clamp(GS.prestigio + dprest, 0, PRESTIGIO_MAX);
+  GS.riesgo = clamp(GS.riesgo + driesgo, 0, RIESGO_MAX);
+  GS.riesgoActo += driesgo;
   if (GS.riesgo > RIESGO_DANGER) GS.maxRiesgoSuperado80 = true;
 
   // Show stat delta toast
-  showStatDelta(ch.prest || 0, ch.riesgo || 0);
+  showStatDelta(dprest, driesgo);
 
   // Record decision
   GS.decisiones.push({
@@ -135,12 +140,13 @@ function makeChoice(ev, idx) {
     titulo: ev.title,
     opcion: idx,
     texto: ch.text,
-    prest: ch.prest || 0,
-    riesgoChange: ch.riesgo || 0
+    prest: dprest,
+    prestBase: ch.prest || 0,
+    riesgoChange: driesgo
   });
 
   // Score
-  GS.puntuacion += Math.max(0, (ch.prest || 0)) * 2;
+  GS.puntuacion += Math.max(0, dprest) * 2;
 
   // Final type
   if (ch.finalType) GS.finalType = ch.finalType;
@@ -253,7 +259,7 @@ function checkLogros() {
   LOGROS_DEF.forEach(def => {
     if (!GS.logros.includes(def.id) && def.check(GS)) {
       GS.logros.push(def.id);
-      showNotification("🏆 Logro: " + def.nombre);
+      showLogroNotif(def);
     }
   });
 }

@@ -131,6 +131,7 @@
 .historial-table tr:last-child td { border-bottom: none; }
 .historial-table tr.best-run td { color: var(--sepia-pale); background: rgba(197,154,64,0.06); }
 .hist-medal { font-size: 1.1rem; }
+.hist-diff { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.04em; }
 .hist-empty {
   font-family: 'IM Fell English', serif; font-style: italic;
   color: rgba(197,154,122,0.3); font-size: 0.95rem;

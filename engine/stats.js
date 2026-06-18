@@ -33,7 +33,8 @@ function recordCompletedRun(finalScore, prestigio, riesgo, logros, finalType, ti
     riesgo,
     logros: logros.length,
     finalType,
-    tiempo: tiempoSeg || 0
+    tiempo: tiempoSeg || 0,
+    dificultad: GS.dificultad || 'normal'
   });
   if (gs.historial.length > 20) gs.historial = gs.historial.slice(0, 20);
   // Merge logros
@@ -101,21 +102,29 @@ function renderStats() {
     histDiv.innerHTML = '<div class="hist-empty">Aún no hay partidas completadas registradas.</div>';
   } else {
     const bestIdx = gs.historial.indexOf(gs.historial.reduce((a,b) => a.score>b.score?a:b));
-    let rows = gs.historial.map((h, i) => `
+    const DIFF_LABEL = { facil: 'Estudiante', normal: 'Revolucionario', dificil: 'Conspirador' };
+    const DIFF_COLOR = { facil: '#6aaa50', normal: '#d4af37', dificil: '#c04040' };
+    let rows = gs.historial.map((h, i) => {
+      const diff = h.dificultad || 'normal';
+      const diffLabel = DIFF_LABEL[diff] || diff;
+      const diffColor = DIFF_COLOR[diff] || '#d4af37';
+      return `
       <tr class="${i === bestIdx ? 'best-run' : ''}">
         <td><span class="hist-medal">${h.medal}</span></td>
         <td>${h.nombre || '—'}</td>
         <td style="font-family:'Cinzel',serif;font-size:1rem;color:var(--sepia-pale)">${h.score}</td>
+        <td><span class="hist-diff" style="color:${diffColor}">${diffLabel}</span></td>
         <td>${(h.prestigio ?? '—')}/150 · ${h.riesgo ?? '—'}</td>
         <td>${h.logros} logro${h.logros !== 1 ? 's' : ''}</td>
         <td>${formatTiempo(h.tiempo)}</td>
         <td style="font-style:italic;font-size:0.82rem">${h.fecha}</td>
-      </tr>`).join('');
+      </tr>`;
+    }).join('');
     histDiv.innerHTML = `
       <table class="historial-table">
         <thead><tr>
           <th>Medal</th><th>Nombre</th><th>Score</th>
-          <th>Stats</th><th>Logros</th><th>Tiempo</th><th>Fecha</th>
+          <th>Dific.</th><th>Stats</th><th>Logros</th><th>Tiempo</th><th>Fecha</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table>`;
@@ -135,8 +144,9 @@ function renderStats() {
     const nivelLabel = bestScore >= 800 ? 'Avanzado 🥇' : bestScore >= 600 ? 'Intermedio 🥈' : bestScore >= 300 ? 'En desarrollo 🥉' : 'Inicial';
     const dominioLogros = earned.length >= 8 ? 'Alto' : earned.length >= 4 ? 'Medio' : 'Bajo';
 
+    const lastDiff = DIFF_LABEL[last.dificultad] || 'Revolucionario';
     const items = [
-      { label: 'ÚLTIMA PARTIDA', val: `${last.score} pts · ${last.medal} · ${last.fecha}`, hi: true },
+      { label: 'ÚLTIMA PARTIDA', val: `${last.score} pts · ${last.medal} · ${lastDiff} · ${last.fecha}`, hi: true },
       { label: 'MEJOR PUNTAJE', val: `${bestScore} pts`, hi: true },
       { label: 'PROMEDIO DE PUNTAJE', val: `${promScore} pts en ${gs.partidas} partida${gs.partidas!==1?'s':''}`, hi: false },
       { label: 'TASA DE ÉXITO', val: `${tasaExito} (${gs.partidas}/${gs.partidas+gs.perdidas} partidas terminadas)`, hi: false },

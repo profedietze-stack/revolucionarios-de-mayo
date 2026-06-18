@@ -1,0 +1,17 @@
+<svg width="100%" viewBox="45 38 450 132" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Firma Cornelio de Saavedra</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+.ink{fill:none;stroke:#0d0d0d;stroke-linecap:round;stroke-linejoin:round;}
+.txt{font-family:'Pinyon Script',cursive;fill:#0d0d0d;}
+</style>
+<text x="55" y="78" class="txt" font-size="42">Cornelio de Saavedra</text>
+<g transform="translate(0,-15)">
+  <path class="ink" stroke-width="1.6" d="M310,82 C308,90 305,102 304,114"/>
+  <path class="ink" stroke-width="1.8" d="M304,114 C296,106 278,102 262,108 C244,116 236,134 242,152 C248,170 268,180 290,178 C312,176 328,162 326,144 C324,128 312,118 300,118 C288,118 278,128 280,140 C282,152 292,158 304,156"/>
+  <path class="ink" stroke-width="1.5" d="M304,156 C312,150 320,144 328,142"/>
+  <path class="ink" stroke-width="1.7" d="M328,142 C340,136 356,134 366,140 C376,148 374,164 362,172 C350,180 334,178 326,168 C318,158 320,146 328,142"/>
+  <path class="ink" stroke-width="1.2" d="M366,140 C378,138 390,140 396,148 C400,154 396,162 388,164"/>
+  <path class="ink" stroke-width="1.4" d="M304,114 C306,110 310,106 314,104 C318,102 322,104 322,110 C322,118 316,126 308,130"/>
+</g>
+</svg>

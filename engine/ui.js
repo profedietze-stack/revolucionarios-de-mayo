@@ -374,6 +374,26 @@ function showNotification(msg) {
   setTimeout(() => n.remove(), 3200);
 }
 
+function showLogroNotif(def) {
+  const iconMatch = def.nombre.match(/^(\p{Emoji})/u);
+  const icon = iconMatch ? iconMatch[1] : '🏆';
+  const nameNoIcon = def.nombre.replace(/^(\p{Emoji}\s*)/u, '');
+  const n = document.createElement('div');
+  n.className = 'logro-notif';
+  n.innerHTML = `
+    <div class="logro-notif-header">✦ LOGRO DESBLOQUEADO ✦</div>
+    <div class="logro-notif-body">
+      <span class="logro-notif-icon">${icon}</span>
+      <div class="logro-notif-text">
+        <div class="logro-notif-name">${nameNoIcon}</div>
+        <div class="logro-notif-desc">${def.desc || ''}</div>
+      </div>
+    </div>`;
+  document.body.appendChild(n);
+  setTimeout(() => n.classList.add('logro-notif-out'), 4200);
+  setTimeout(() => n.remove(), 4600);
+}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'F11') { e.preventDefault(); toggleFullscreen(); }
 });

@@ -3,7 +3,7 @@
 // Cachea el app shell para uso offline. Subí CACHE_VERSION en
 // cada release para forzar actualización del cache.
 // ============================================================
-const CACHE_VERSION = 'rev-mayo-v12.4';
+const CACHE_VERSION = 'rev-mayo-v12.9';
 
 // Archivos críticos: si falta uno, cache.addAll() falla y el SW no instala.
 const APP_SHELL = [
@@ -41,6 +41,7 @@ const APP_SHELL = [
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable-512.png',
   // Engine
+  './engine/error-banner.js',
   './engine/debug.js',
   './engine/audio.js',
   './engine/state.js',
@@ -48,6 +49,10 @@ const APP_SHELL = [
   './engine/stats.js',
   './engine/game.js',
   './engine/sw-register.js',
+  // Signatures
+  './assets/signatures/belgrano.svg',
+  './assets/signatures/moreno.svg',
+  './assets/signatures/saavedra.svg',
   // Screens
   './screens/splash.js',
   './screens/final.js',
