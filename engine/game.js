@@ -49,6 +49,8 @@ function _renderCharLine() {
 }
 
 function charDialogueNext() {
+  const ov = document.getElementById('overlay-character');
+  if (!ov || !ov.classList.contains('visible')) return;
   if (_charLineIdx < _charLines.length - 1) {
     _charLineIdx++;
     _renderCharLine();
@@ -77,12 +79,12 @@ function renderEvent() {
 
 function _doRenderEvent(ev) {
   document.getElementById('event-title').textContent = `${ev.id}. ${ev.title}`;
-  document.getElementById('event-subtitle').textContent = ev.subtitle;
+  document.getElementById('event-subtitle').textContent = ev.subtitle || '';
 
   const nc = document.getElementById('narrative-content');
   nc.innerHTML = '';
   const playerName = (GS && GS.playerName) ? GS.playerName : '';
-  ev.narrative.forEach((p, i) => {
+  (ev.narrative || []).forEach((p, i) => {
     const el = document.createElement('p');
     el.className = 'narrative-text' + (i === 0 ? ' first-paragraph' : '');
     el.style.animationDelay = (i * 0.1) + 's';
@@ -92,11 +94,16 @@ function _doRenderEvent(ev) {
 
   const cc = document.getElementById('choices-container');
   cc.innerHTML = '';
-  ev.choices.forEach((ch, idx) => {
+  (ev.choices || []).forEach((ch, idx) => {
     const btn = document.createElement('button');
     btn.className = 'choice-btn';
     btn.innerHTML = `<span class="choice-indicator">${ch.label}</span>${applyTooltips(ch.text)}`;
-    btn.onclick = () => makeChoice(ev, idx);
+    btn.onclick = () => {
+      if (!btn.classList.contains('ready') || btn.dataset.used) return;
+      btn.dataset.used = '1';
+      cc.querySelectorAll('.choice-btn').forEach(b => { b.dataset.used = '1'; });
+      makeChoice(ev, idx);
+    };
     // Enable clicks only after fade-in completes
     const delay = 500 + idx * 80;
     setTimeout(() => btn.classList.add('ready'), delay);
@@ -180,7 +187,9 @@ function makeChoice(ev, idx) {
 
 function closeSpecial() {
   document.getElementById('overlay-special').classList.remove('visible');
-  if (pendingSpecialCallback) { pendingSpecialCallback(); pendingSpecialCallback = null; }
+  const cb = pendingSpecialCallback;
+  pendingSpecialCallback = null;
+  if (cb) cb();
 }
 
 function showReflection(actNum, callback) {
@@ -208,7 +217,7 @@ function closeReflection() {
   document.getElementById('overlay-reflection').classList.remove('visible');
   const cb = pendingReflectionCallback;
   pendingReflectionCallback = null;
-  setTimeout(cb, 400);
+  if (cb) setTimeout(cb, 400);
 }
 
 function advanceEvent() {
@@ -257,9 +266,14 @@ function advanceEvent() {
 
 function checkLogros() {
   LOGROS_DEF.forEach(def => {
-    if (!GS.logros.includes(def.id) && def.check(GS)) {
-      GS.logros.push(def.id);
-      showLogroNotif(def);
+    if (GS.logros.includes(def.id)) return;
+    try {
+      if (def.check(GS)) {
+        GS.logros.push(def.id);
+        showLogroNotif(def);
+      }
+    } catch(e) {
+      console.warn('[RevMayo] checkLogros error en logro', def.id, e);
     }
   });
 }

@@ -55,7 +55,7 @@ function showActTransition(actNum, callback) {
   }
 
   // Build columns
-  const colsHTML = data.columns.map(c => `
+  const colsHTML = (data.columns || []).map(c => `
     <div>
       <div class="act-trans-col-title">${c.title}</div>
       <div class="act-trans-col-text">${c.text}</div>
@@ -270,8 +270,8 @@ function updateUI() {
   if (mLab) mLab.textContent = actLabel;
 
   // Frases
-  const f = FRASES[GS.fraseIndex % FRASES.length];
-  document.getElementById('frase-del-dia').innerHTML =
+  const f = (FRASES && FRASES.length) ? FRASES[GS.fraseIndex % FRASES.length] : null;
+  if (f) document.getElementById('frase-del-dia').innerHTML =
     `"${f.text}" <em>— ${f.author}</em>`;
 
   // Logros

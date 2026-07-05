@@ -26,7 +26,8 @@ const AudioEngine = (() => {
   }
 
   function resume() {
-    if (ctx && ctx.state === 'suspended') ctx.resume();
+    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+    if (ctx && ctx.state === 'closed') { initialized = false; init(); }
   }
 
   // ── Master helpers ─────────────────────────────────────────

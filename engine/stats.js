@@ -97,13 +97,13 @@ function renderStats() {
   });
 
   // --- Historial ---
+  const DIFF_LABEL = { facil: 'Estudiante', normal: 'Revolucionario', dificil: 'Conspirador' };
+  const DIFF_COLOR = { facil: '#6aaa50', normal: '#d4af37', dificil: '#c04040' };
   const histDiv = document.getElementById('stats-historial');
   if (gs.historial.length === 0) {
     histDiv.innerHTML = '<div class="hist-empty">Aún no hay partidas completadas registradas.</div>';
   } else {
     const bestIdx = gs.historial.indexOf(gs.historial.reduce((a,b) => a.score>b.score?a:b));
-    const DIFF_LABEL = { facil: 'Estudiante', normal: 'Revolucionario', dificil: 'Conspirador' };
-    const DIFF_COLOR = { facil: '#6aaa50', normal: '#d4af37', dificil: '#c04040' };
     let rows = gs.historial.map((h, i) => {
       const diff = h.dificultad || 'normal';
       const diffLabel = DIFF_LABEL[diff] || diff;
