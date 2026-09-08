@@ -79,7 +79,7 @@ async function descargarCaptura() {
     if (typeof html2canvas === 'undefined') {
       await loadScriptWithFallback([
         './vendor/html2canvas.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
+        'vendor/html2canvas.min.js'
       ]);
     }
     const canvas = await html2canvas(card, {
