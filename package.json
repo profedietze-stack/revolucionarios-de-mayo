@@ -1,0 +1,8 @@
+{
+  "name": "revolucionarios-de-mayo",
+  "private": true,
+  "description": "Revolucionarios de Mayo — juego histórico sobre la Revolución de 1810 (ProfeD.)",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\""
+  }
+}
