@@ -33,7 +33,21 @@ let pendingReflectionCallback = null;
 // ============================================================
 // CORE GAME FUNCTIONS
 // ============================================================
-function clamp(v, mn, mx) { return Math.max(mn, Math.min(mx, v)); }
+// Ojo con el NaN: `Math.max(0, Math.min(150, NaN))` devuelve NaN, porque las dos
+// comparaciones con NaN son falsas y se cuela por el medio. Y la derrota se comprueba
+// con `GS.riesgo >= RIESGO_MAX`, que con NaN es false para siempre: la partida deja de
+// poder perderse y ninguna decision del alumno vuelve a tener consecuencia.
+function clamp(v, mn, mx) {
+  const n = Number(v);
+  if (!Number.isFinite(n)) return mn;
+  return Math.max(mn, Math.min(mx, n));
+}
+
+// Un numero del guardado, o el valor por defecto si vino cualquier otra cosa.
+function numeroSano(v, porDefecto) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : porDefecto;
+}
 
 // Lee el save y devuelve el estado GS, soportando el formato versionado
 // { version, state } y el formato legacy (GS plano sin versión). null si inválido.
@@ -42,6 +56,16 @@ function migrateSave(raw) {
   try { data = JSON.parse(raw); } catch (e) { return null; }
   const state = (data && data.version !== undefined && data.state) ? data.state : data;
   if (!state || typeof state !== 'object' || typeof state.currentEvent !== 'number') return null;
+  // Los numeros y las listas, saneados: el save se edita desde la consola y de aca en
+  // adelante cada cuenta arrastra lo que venga. `currentEvent` ya se comprobo arriba.
+  state.prestigio  = clamp(numeroSano(state.prestigio, 50), 0, PRESTIGIO_MAX);
+  state.riesgo     = clamp(numeroSano(state.riesgo, 15), 0, RIESGO_MAX);
+  state.riesgoActo = numeroSano(state.riesgoActo, 0);
+  state.puntuacion = numeroSano(state.puntuacion, 0);
+  if (!Array.isArray(state.logros)) state.logros = [];
+  if (!Array.isArray(state.decisiones)) state.decisiones = [];
+  if (typeof state.playerName !== 'string') state.playerName = '';
+
   // Compatibilidad con saves anteriores a la feature de rutas alternativas
   if (!state.ruta) state.ruta = '';
   if (state.riesgoActo === undefined) state.riesgoActo = 0;
@@ -66,8 +90,18 @@ function determineRuta() {
   GS.ruta = audaces >= 3 ? 'combatiente' : 'diplomático';
 }
 
+// Leer el guardado puede LANZAR, no devolver null: pasa en modo privado y con las
+// cookies de sitio bloqueadas. `checkLoadButton` corre al abrir la portada, asi que
+// sin esto la primera pantalla del juego se cortaba antes de dibujarse.
+function leerGuardado() {
+  try { return localStorage.getItem(SAVE_KEY); } catch (e) {
+    console.warn('[RevMayo] No se pudo leer el guardado:', e.message);
+    return null;
+  }
+}
+
 function checkLoadButton() {
-  const saved = localStorage.getItem(SAVE_KEY);
+  const saved = leerGuardado();
   const btn = document.getElementById('btn-load');
   if (!saved) {
     btn.classList.add('btn-disabled');
@@ -151,7 +185,7 @@ function _initGame(name, dificultad) {
 }
 
 function loadGame() {
-  const saved = localStorage.getItem(SAVE_KEY);
+  const saved = leerGuardado();
   if (!saved) { showNotification("No hay partida guardada."); return; }
   const state = migrateSave(saved);
   if (!state) { showNotification("La partida guardada no es válida."); return; }
