@@ -9,6 +9,7 @@ const AudioEngine = (() => {
   let ctx = null;
   let masterGain = null;
   let muted = false;
+  let volumenPrevio = 1.0;   // el volumen al que vuelve el boton de silencio
   let initialized = false;
   let activeNodes = {};   // layerId → { nodes, gain }
   let scheduledTimers = [];
@@ -34,7 +35,11 @@ const AudioEngine = (() => {
   function toggleMute() {
     if (!initialized) return;
     muted = !muted;
-    masterGain.gain.setTargetAtTime(muted ? 0 : 0.72, ctx.currentTime, 0.3);
+    // Al des-silenciar se vuelve al volumen que habia, no a un numero fijo: antes esto
+    // ponia 0.72 mientras `init` dejaba 1.0, asi que apretar el boton dos veces bajaba
+    // el juego un 28% para siempre y ninguna otra pulsacion lo devolvia.
+    if (muted) volumenPrevio = masterGain.gain.value;
+    masterGain.gain.setTargetAtTime(muted ? 0 : volumenPrevio, ctx.currentTime, 0.3);
     const btn = document.getElementById('audio-toggle-btn');
     if (btn) btn.textContent = muted ? '🔇' : '🔊';
   }
