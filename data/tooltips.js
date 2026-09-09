@@ -23,7 +23,7 @@ const TOOLTIP_DICT = [
   ['Río de la Plata', 'Virreinato del Río de la Plata, creado en 1776. Abarcaba el actual territorio de Argentina, Uruguay, Bolivia y Paraguay. Su capital era Buenos Aires.'],
   ['contraespionaje', 'Conjunto de técnicas para detectar y neutralizar espías enemigos. En 1810, los patriotas desarrollaron rudimentarias redes de inteligencia para proteger sus comunicaciones clandestinas.'],
   ['libre comercio', 'Política que permitía comerciar con todas las naciones, no solo con España. El monopolio comercial español era una de las principales quejas de los comerciantes criollos. Moreno lo decretó en mayo de 1810.'],
-  ['Primera Junta', 'Primer gobierno patrio del Río de la Plata, constituido el 25 de mayo de 1810. Presidida por Saavedra, con Moreno y Paso como secretarios y siete vocales.'],
+  ['Primera Junta', 'Primer gobierno patrio del Río de la Plata, constituido el 25 de mayo de 1810. Presidida por Saavedra, con Moreno y Paso como secretarios y seis vocales: nueve integrantes en total.'],
   ['peninsulares', 'Personas nacidas en España. En el sistema colonial monopolizaban los cargos más altos de gobierno, generando una profunda tensión con los criollos nacidos en América.'],
   ['Ilustración', 'Movimiento filosófico europeo del siglo XVIII que promovía la razón, la libertad individual y la soberanía popular. Influyó profundamente en los líderes de la Revolución de Mayo.'],
   ['escarapelas', 'Distintivos de tela celeste y blanca, símbolo del movimiento patriota. French y Beruti las distribuyeron el 25 de mayo de 1810 para identificar a los revolucionarios.'],
