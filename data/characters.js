@@ -5,7 +5,7 @@ const CHARACTERS = {
   belgrano: {
     nombre: "Manuel Belgrano",
     cargo: "Abogado · Vocal de la Primera Junta",
-    img: "./assets/portraits/belgrano.png",
+    img: "./assets/portraits/belgrano.jpg",
     dialogos: {
       jaboneria: [
         "Sé que esto te parece mucho para una primera noche. La Jabonería no es lo que parece desde afuera, y nosotros tampoco. Somos abogados, comerciantes, hombres de iglesia. Gente que tiene más que perder que la mayoría y aun así está acá.",
@@ -23,7 +23,7 @@ const CHARACTERS = {
   french: {
     nombre: "Domingo French",
     cargo: "Comandante de los Chisperos · Milicia Patriota",
-    img: "./assets/portraits/french.png",
+    img: "./assets/portraits/french.jpg",
     dialogos: {
       escarapelas: [
         "No me importa lo que están discutiendo adentro del Cabildo. Lo que me importa es que afuera haya suficiente gente para que no puedan ignorarnos. Sin presión popular, los doctores negocian, ceden, y en una semana todo vuelve a ser como antes.",
@@ -36,7 +36,7 @@ const CHARACTERS = {
   beruti: {
     nombre: "Antonio Luis Beruti",
     cargo: "Abogado · Organizador Popular · Chispero",
-    img: "./assets/portraits/beruti.png",
+    img: "./assets/portraits/beruti.jpg",
     dialogos: {
       plaza25: [
         "Cuatrocientas cincuenta y siete firmas. Las conté tres veces. Comerciantes, artesanos, milicianos, un zapatero que firmó con una cruz porque no sabe escribir. Eso es lo que el pueblo puso sobre la mesa del Cabildo.",
@@ -49,7 +49,7 @@ const CHARACTERS = {
   cisneros: {
     nombre: "Baltasar Hidalgo de Cisneros",
     cargo: "Virrey del Río de la Plata",
-    img: "./assets/portraits/cisneros.png",
+    img: "./assets/portraits/cisneros.jpg",
     dialogos: {
       cabildoabierto: [
         "Te mirás y ves a un revolucionario. Yo te miro y veo a un joven inteligente siendo usado por gente que tiene mucho que ganar y te pone a vos a correr los riesgos. No es casualidad que los que agitan siempre estén a salvo mientras los mensajeros terminan presos.",
@@ -62,7 +62,7 @@ const CHARACTERS = {
   castelli: {
     nombre: "Juan José Castelli",
     cargo: "Abogado · El Tribuno · Vocal de la Primera Junta",
-    img: "./assets/portraits/castelli.png",
+    img: "./assets/portraits/castelli.jpg",
     dialogos: {
       contrarrevolucion: [
         "Escuchaste el argumento de los realistas: que debemos esperar, que España se recuperará, que la lealtad al Rey nos obliga. Es inteligente. Pero se sostiene sobre una mentira: que la autoridad del Rey puede delegarse al Virrey cuando el Rey está cautivo. Eso no tiene base en ningún derecho natural ni positivo.",
@@ -75,7 +75,7 @@ const CHARACTERS = {
   moreno: {
     nombre: "Mariano Moreno",
     cargo: "Abogado · Secretario de la Primera Junta",
-    img: "./assets/portraits/moreno.png",
+    img: "./assets/portraits/moreno.jpg",
     dialogos: {
       decreto: [
         "Los revolucionarios necesitan dos cosas: ideas para saber adónde van, y gente con las ideas suficientemente claras para transmitirlas sin distorsionarlas. Vos parecés ser lo segundo, que es más raro de lo que parece.",
@@ -93,7 +93,7 @@ const CHARACTERS = {
   saavedra: {
     nombre: "Cornelio Saavedra",
     cargo: "Teniente Coronel · Presidente de la Primera Junta",
-    img: "./assets/portraits/saavedra.png",
+    img: "./assets/portraits/saavedra.jpg",
     dialogos: {
       primerajunta: [
         "Ganamos la primera batalla. El Cabildo votó, el Virrey cedió, la Junta existe. Eso es más de lo que muchos creíamos posible hace un mes. Ahora viene lo difícil.",
@@ -106,7 +106,7 @@ const CHARACTERS = {
   liniers: {
     nombre: "Santiago de Liniers",
     cargo: "Ex-Virrey Interino · Jefe de la Resistencia Realista",
-    img: "./assets/portraits/liniers.png",
+    img: "./assets/portraits/liniers.jpg",
     dialogos: {
       cordoba: [
         "Sé por qué estás acá. Y sé lo que te van a pedir que me digas: que me rinda, que la causa está perdida, que mi resistencia solo añade sangre inútil a lo que ya es irreversible.",

@@ -8,3 +8,7 @@ _referencia/
 *.key
 *.p12
 secrets.json
+
+# Retratos: originales y respaldo, no se publican
+assets/portraits/_nuevos/
+assets/portraits/_viejos/

@@ -3,7 +3,7 @@
 // Cachea el app shell para uso offline. Subí CACHE_VERSION en
 // cada release para forzar actualización del cache.
 // ============================================================
-const CACHE_VERSION = 'rev-mayo-v12.10';
+const CACHE_VERSION = 'rev-mayo-v12.12';
 
 // Archivos críticos: si falta uno, cache.addAll() falla y el SW no instala.
 const APP_SHELL = [
@@ -61,14 +61,14 @@ const APP_SHELL = [
 
 // Portraits: opcionales — si falta un PNG no rompe la instalación del SW.
 const PORTRAIT_SHELL = [
-  './assets/portraits/belgrano.png',
-  './assets/portraits/french.png',
-  './assets/portraits/beruti.png',
-  './assets/portraits/cisneros.png',
-  './assets/portraits/castelli.png',
-  './assets/portraits/moreno.png',
-  './assets/portraits/saavedra.png',
-  './assets/portraits/liniers.png',
+  './assets/portraits/belgrano.jpg',
+  './assets/portraits/french.jpg',
+  './assets/portraits/beruti.jpg',
+  './assets/portraits/cisneros.jpg',
+  './assets/portraits/castelli.jpg',
+  './assets/portraits/moreno.jpg',
+  './assets/portraits/saavedra.jpg',
+  './assets/portraits/liniers.jpg',
 ];
 
 self.addEventListener('install', (e) => {

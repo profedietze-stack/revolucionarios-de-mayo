@@ -110,6 +110,9 @@
   object-fit: contain;
   object-position: bottom center;
   display: block;
+  border: 2px solid var(--sepia);
+  border-radius: 3px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(197,160,64,0.35);
 }
 .char-portrait-name {
   font-family: 'Cinzel', serif;
