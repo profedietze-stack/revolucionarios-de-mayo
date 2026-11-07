@@ -142,6 +142,29 @@
   padding-bottom: 12px; border-bottom: 1px solid var(--parchment-deep);
   letter-spacing: 0.05em;
 }
+/* Ilustración del evento */
+.event-scene {
+  margin: 0 0 20px;
+}
+.event-scene[hidden] { display: none; }
+.event-scene img {
+  display: block; width: 100%;
+  aspect-ratio: 1316 / 716;
+  max-height: 300px;
+  object-fit: cover;
+  border: 2px solid var(--sepia);
+  border-radius: 3px;
+  box-shadow: 0 4px 14px rgba(26,16,5,0.25);
+  background: var(--parchment-deep);
+}
+.event-scene figcaption {
+  margin-top: 5px; text-align: right;
+  font-size: 0.7rem; font-style: italic;
+  color: var(--sepia); letter-spacing: 0.05em;
+}
+@media (max-width: 600px) {
+  .event-scene img { max-height: 190px; }
+}
 .narrative-text {
   font-size: 1.1rem; line-height: 1.85;
   color: var(--ink-light); margin-bottom: 12px;

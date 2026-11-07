@@ -3,7 +3,7 @@
 // Cachea el app shell para uso offline. Subí CACHE_VERSION en
 // cada release para forzar actualización del cache.
 // ============================================================
-const CACHE_VERSION = 'rev-mayo-v12.13';
+const CACHE_VERSION = 'rev-mayo-v12.14';
 
 // Archivos críticos: si falta uno, cache.addAll() falla y el SW no instala.
 const APP_SHELL = [
@@ -77,6 +77,8 @@ const SCENE_SHELL = [
   './assets/scenes/jaboneria.jpg',
   './assets/scenes/cabildo-interior.jpg',
   './assets/scenes/balcon.jpg',
+  './assets/scenes/cintas.jpg',
+  './assets/scenes/atardecer.jpg',
 ];
 
 self.addEventListener('install', (e) => {

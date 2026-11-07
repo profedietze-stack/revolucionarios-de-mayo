@@ -105,6 +105,7 @@ const EVENTS = [
     title: "French y Beruti: Las Cintas",
     subtitle: "Acto I · La Tensión · 21 de mayo de 1810",
     showCharacter: { id: 'french', ctx: 'escarapelas' },
+    scene: { src: 'assets/scenes/cintas.jpg', alt: 'Ilustración: dos jóvenes patriotas reparten cintas celestes y blancas a vecinos en la plaza, bajo la llovizna.' },
     narrative: [
       "Dos hombres que van a escribir su nombre en la historia con gestos pequeños te buscan esta tarde: Domingo French y Antonio Luis Beruti. French es militar de carácter, Beruti es abogado de ideas encendidas. Juntos han organizado lo que nadie había pensado organizar: la movilización popular para el Cabildo Abierto del 22 de mayo.",
       "Su plan es simple y audaz. Distribuirán escarapelas de tela celeste y blanca entre la multitud para identificar a los patriotas, crear unidad visual, y señalar a los indecisos que hay un movimiento organizado —no solo una protesta espontánea. Necesitan mensajeros discretos que lleven las cintas a distintos barrios sin ser interceptados.",
@@ -139,6 +140,7 @@ const EVENTS = [
     title: "La Traición de Cisneros",
     subtitle: "Acto I · La Tensión · 24 de mayo de 1810",
     showCharacter: { id: 'castelli', ctx: 'contrarrevolucion' },
+    scene: { src: 'assets/scenes/atardecer.jpg', alt: 'Ilustración: la plaza casi vacía al atardecer, después de los días del Cabildo Abierto.' },
     narrative: [
       "Ayer el Cabildo terminó de contar los votos del Cabildo Abierto. Hoy anuncia lo que hizo con ellos, y es un golpe para los patriotas: Cisneros no fue destituido. En cambio se formó una Junta presidida por el propio Virrey, con Saavedra, Castelli, Solá e Inchaurregui de vocales. Es una maniobra que parece una concesión pero es, en realidad, un vaciamiento de la revolución.",
       "El movimiento patriota reacciona con indignación. Moreno está furioso con una frialdad que asusta más que el enojo. Belgrano dice que esto no puede aceptarse. Saavedra y Castelli, que figuran como vocales de esa junta, ya avisaron que renuncian: Cisneros al frente de cualquier gobierno hace imposible el cambio real. La junta que nació esta mañana no va a llegar entera al amanecer.",

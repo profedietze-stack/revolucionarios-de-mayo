@@ -81,6 +81,22 @@ function _doRenderEvent(ev) {
   document.getElementById('event-title').textContent = `${ev.id}. ${ev.title}`;
   document.getElementById('event-subtitle').textContent = ev.subtitle || '';
 
+  // Ilustración opcional del evento (ev.scene = { src, alt })
+  const sceneFig = document.getElementById('event-scene');
+  const sceneImg = document.getElementById('event-scene-img');
+  if (sceneFig && sceneImg) {
+    if (ev.scene && ev.scene.src) {
+      sceneImg.onerror = () => { sceneFig.hidden = true; };
+      sceneImg.alt = ev.scene.alt || '';
+      sceneImg.src = ev.scene.src;
+      sceneFig.hidden = false;
+    } else {
+      sceneImg.onerror = null;
+      sceneFig.hidden = true;
+      sceneImg.removeAttribute('src');
+    }
+  }
+
   const nc = document.getElementById('narrative-content');
   nc.innerHTML = '';
   const playerName = (GS && GS.playerName) ? GS.playerName : '';
