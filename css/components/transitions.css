@@ -25,6 +25,26 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Ilustración del acto: sangra hasta el borde de la caja y se funde con el fondo oscuro */
+.act-scene {
+  display: block;
+  width: calc(100% + 112px);
+  margin: -50px -56px 22px;
+  height: 230px;
+  object-fit: cover;
+  object-position: center 40%;
+  opacity: 0.78;
+  filter: sepia(0.15) saturate(0.9);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+@media (max-width: 600px) {
+  .act-scene { width: calc(100% + 40px); margin: -28px -20px 16px; height: 150px; }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .act-scene { width: calc(100% + 64px); margin: -36px -32px 18px; }
+}
+
 @media (max-width: 600px) {
   #overlay-act { padding: 20px 12px 40px; }
   .act-transition-inner { padding: 28px 20px; }

@@ -3,7 +3,7 @@
 // Cachea el app shell para uso offline. Subí CACHE_VERSION en
 // cada release para forzar actualización del cache.
 // ============================================================
-const CACHE_VERSION = 'rev-mayo-v12.12';
+const CACHE_VERSION = 'rev-mayo-v12.13';
 
 // Archivos críticos: si falta uno, cache.addAll() falla y el SW no instala.
 const APP_SHELL = [
@@ -71,6 +71,14 @@ const PORTRAIT_SHELL = [
   './assets/portraits/liniers.jpg',
 ];
 
+// Escenas ilustradas: opcionales, igual que los retratos.
+const SCENE_SHELL = [
+  './assets/scenes/plaza.jpg',
+  './assets/scenes/jaboneria.jpg',
+  './assets/scenes/cabildo-interior.jpg',
+  './assets/scenes/balcon.jpg',
+];
+
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_VERSION)
@@ -78,7 +86,7 @@ self.addEventListener('install', (e) => {
       .then(() => caches.open(CACHE_VERSION).then(cache =>
         // Best-effort: cachear portraits ignorando fallos individuales
         Promise.allSettled(
-          PORTRAIT_SHELL.map(url =>
+          [...PORTRAIT_SHELL, ...SCENE_SHELL].map(url =>
             cache.add(url).catch(() => {})
           )
         )

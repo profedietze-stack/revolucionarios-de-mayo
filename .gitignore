@@ -12,3 +12,6 @@ secrets.json
 # Retratos: originales y respaldo, no se publican
 assets/portraits/_nuevos/
 assets/portraits/_viejos/
+# Escenas: originales de la IA (.jfif) y copias de revision, no se publican
+assets/scenes/*.jfif
+assets/scenes/revision/

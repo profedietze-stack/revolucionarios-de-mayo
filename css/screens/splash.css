@@ -10,6 +10,16 @@
 }
 #screen-splash.fade-out { opacity: 0; pointer-events: none; }
 
+/* Plaza de la Victoria, 25 de mayo de 1810: fondo muy tenue detrás del sello */
+#screen-splash::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('../../assets/scenes/plaza.jpg') center 60% / cover no-repeat;
+  opacity: 0.16;
+  filter: sepia(0.3) saturate(0.8);
+  pointer-events: none;
+}
+
 .splash-container {
   max-width: 620px; width: 100%;
   text-align: center;

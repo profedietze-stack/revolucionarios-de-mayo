@@ -37,10 +37,22 @@ function showStatDelta(prestChange, riesgoChange) {
 // ============================================================
 // ACT TRANSITION
 // ============================================================
+// Ilustración de cada acto (recreaciones, ver manual). alt = descripción para lectores de pantalla.
+const ACT_SCENES = {
+  1: { src: 'assets/scenes/jaboneria.jpg', alt: 'Ilustración: patriotas reunidos de noche en la jabonería de Vieytes.' },
+  2: { src: 'assets/scenes/cabildo-interior.jpg', alt: 'Ilustración: debate en el Cabildo Abierto del 22 de mayo de 1810.' },
+  3: { src: 'assets/scenes/balcon.jpg', alt: 'Ilustración: la multitud en la plaza frente al balcón del Cabildo, 25 de mayo de 1810.' }
+};
+
 function showActTransition(actNum, callback) {
   const data = ACT_TRANSITIONS[actNum];
   if (!data) { callback(); return; }
   AudioEngine.playActTransition(actNum);
+
+  const scene = ACT_SCENES[actNum];
+  const sceneHTML = scene
+    ? `<img class="act-scene" src="${scene.src}" alt="${scene.alt}" onerror="this.remove()">`
+    : '';
 
   const inner = document.getElementById('act-transition-inner');
 
@@ -74,6 +86,7 @@ function showActTransition(actNum, callback) {
   }
 
   inner.innerHTML = `
+    ${sceneHTML}
     ${particlesHTML}
     <div class="act-roman">${data.roman}</div>
     <div class="act-trans-title">${data.title}</div>
