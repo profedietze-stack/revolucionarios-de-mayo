@@ -23,6 +23,7 @@ const EVENTS = [
     id: 2,
     title: "La Jabonería Clandestina",
     subtitle: "Acto I · La Tensión · 20 de abril de 1810",
+    scene: { src: 'assets/scenes/jaboneria.jpg', alt: 'Ilustración: patriotas reunidos de noche en la jabonería de Vieytes.' },
     showCharacter: { id: 'belgrano', ctx: 'jaboneria' },
     narrative: [
       "La Jabonería de Hipólito Vieytes, en los márgenes de la ciudad, parece desde afuera un establecimiento comercial ordinario. Por dentro, es el corazón de la conspiración patriota. El olor a sebo se mezcla con el de papel y tinta fresca mientras una docena de hombres hablan en voz baja alrededor de una mesa larga.",
@@ -108,9 +109,9 @@ const EVENTS = [
     scene: { src: 'assets/scenes/cintas.jpg', alt: 'Ilustración: dos jóvenes patriotas reparten cintas celestes y blancas a vecinos en la plaza, bajo la llovizna.' },
     narrative: [
       "Dos hombres que van a escribir su nombre en la historia con gestos pequeños te buscan esta tarde: Domingo French y Antonio Luis Beruti. French es militar de carácter, Beruti es abogado de ideas encendidas. Juntos han organizado lo que nadie había pensado organizar: la movilización popular para el Cabildo Abierto del 22 de mayo.",
-      "Su plan es simple y audaz. Distribuirán escarapelas de tela celeste y blanca entre la multitud para identificar a los patriotas, crear unidad visual, y señalar a los indecisos que hay un movimiento organizado —no solo una protesta espontánea. Necesitan mensajeros discretos que lleven las cintas a distintos barrios sin ser interceptados.",
+      "Su plan es simple y audaz. Distribuirán cintas de tela celeste y blanca entre la multitud para identificar a los patriotas, crear unidad visual, y señalar a los indecisos que hay un movimiento organizado —no solo una protesta espontánea. Necesitan mensajeros discretos que lleven las cintas a distintos barrios sin ser interceptados.",
       "También necesitan que la gente llegue al Cabildo. No cualquier gente: gente que sepa que está ahí para respaldar una revolución, no para mirar un espectáculo. French te mira con su directness militar: '¿Podés tener veinte personas de confianza en la plaza mañana a las ocho?'",
-      "Beruti agrega en voz más baja que si el plan falla y los identifican como organizadores, los dos irán presos antes del amanecer del 22. La escarapela que te extienden es un símbolo y una sentencia posible al mismo tiempo."
+      "Beruti agrega en voz más baja que si el plan falla y los identifican como organizadores, los dos irán presos antes del amanecer del 22. La cinta que te extienden es un símbolo y una sentencia posible al mismo tiempo."
     ],
     choices: [
       { text: "Aceptar distribuir cintas y reclutar veinte personas para la plaza.", prest: 2, riesgo: 8, label: "A" },
@@ -122,6 +123,7 @@ const EVENTS = [
     id: 8,
     title: "El Cabildo Abierto",
     subtitle: "Acto I · La Tensión · 22 de mayo de 1810",
+    scene: { src: 'assets/scenes/cabildo-debate.jpg', alt: 'Ilustración: debate en el Cabildo Abierto del 22 de mayo de 1810, entre un orador criollo y el obispo.' },
     showCharacter: { id: 'cisneros', ctx: 'cabildoabierto' },
     narrative: [
       "El Cabildo Abierto del 22 de mayo es un campo de batalla que parece una sala de reunión. El Cabildo repartíó cuatrocientas cincuenta invitaciones entre los vecinos principales, y doscientos cincuenta y uno se presentaron a votar sobre el destino del Virrey Cisneros. Afuera, la plaza ya tiene gente apostada desde el amanecer, muchos con las cintas que French y Beruti distribuyeron. Adentro, el debate es feroz.",
@@ -193,9 +195,9 @@ const EVENTS = [
     subtitle: "Acto I · La Tensión · 25 de mayo de 1810, madrugada",
     showCharacter: { id: 'beruti', ctx: 'plaza25' },
     narrative: [
-      "Suenan las campanas de la Catedral en la madrugada del 25 de mayo. No son las campanas de la misa: son el llamado. Miles de personas han inundado la Plaza de la Victoria desde el amanecer, muchas de ellas convocadas por mensajeros como tú durante las últimas noches. La plaza es un mar de sombreros, capas y escarapelas de tela blanca y celeste.",
+      "Suenan las campanas de la Catedral en la madrugada del 25 de mayo. No son las campanas de la misa: son el llamado. Miles de personas han inundado la Plaza de la Victoria desde el amanecer, muchas de ellas convocadas por mensajeros como tú durante las últimas noches. La plaza es un mar de sombreros, capas y cintas de tela blanca y celeste.",
       "El Cabildo es visible desde donde estás, con sus ventanas iluminadas por dentro. Ahí dentro se está decidiendo el futuro. Afuera, la multitud es la presión que debe empujar esa decisión en la dirección correcta. Los revolucionarios han planeado esto con precisión: el pueblo en la plaza no es decoración, es el argumento más poderoso.",
-      "Tienes en tu bolsillo una pequeña bolsa de cintas y escarapelas, símbolos de la causa patriota. También tienes mensajes verbales para transmitir a ciertos líderes de grupos dentro de la multitud, coordinando posiciones estratégicas alrededor del Cabildo.",
+      "Tienes en tu bolsillo una pequeña bolsa de cintas celestes y blancas, símbolos de la causa patriota. También tienes mensajes verbales para transmitir a ciertos líderes de grupos dentro de la multitud, coordinando posiciones estratégicas alrededor del Cabildo.",
       "Este es el momento para el cual has trabajado estas semanas. La historia se está escribiendo ahora mismo, y tú estás en el centro de ella."
     ],
     choices: [
@@ -208,6 +210,7 @@ const EVENTS = [
     id: 13,
     title: "Voz en la Multitud",
     subtitle: "Acto I · La Tensión · 25 de mayo de 1810",
+    scene: { src: 'assets/scenes/balcon.jpg', alt: 'Ilustración: la multitud en la plaza frente al balcón del Cabildo, 25 de mayo de 1810.' },
     narrative: [
       "Desde tu posición en la plaza, escuchas las voces que resuenan en el Cabildo mientras los debates se filtran por las ventanas abiertas. El Dr. Mariano Moreno —joven, apasionado, de voz cortante como filo— argumenta con una claridad que paraliza: 'La soberanía reside en el pueblo. Si el Rey no puede gobernar, el pueblo debe hacerlo.' Cada palabra cae sobre la plaza como una piedra en agua quieta.",
       "Luego habla Juan José Castelli. Lo llaman 'el tribuno' y esta tarde entienden por qué: su oratoria tiene la cadencia de quien ha estudiado los filósofos de la Ilustración y los ha digerido en experiencia viva. Habla de los derechos naturales del hombre, de la igualdad entre americanos y peninsulares, de una nueva forma de entender el poder.",
@@ -228,6 +231,7 @@ const EVENTS = [
     id: 14,
     title: "La Primera Junta",
     subtitle: "Acto II · La Revolución · 25 de mayo de 1810, tarde",
+    scene: { src: 'assets/scenes/jura-junta.jpg', alt: 'Ilustración: juramento de los miembros de la Primera Junta ante un crucifijo y los Evangelios.' },
     showCharacter: { id: 'saavedra', ctx: 'primerajunta' },
     narrative: [
       "Ha sucedido. Cornelio Saavedra acaba de ser designado Presidente de la Primera Junta de Gobierno del Río de la Plata. A su lado, seis vocales —Juan José Castelli, Manuel Belgrano, Miguel de Azcuénaga, el presbítero Manuel Alberti, Domingo Matheu y Juan Larrea— y dos secretarios: Mariano Moreno y Juan José Paso. Nueve hombres que hoy cargan el peso de una nación que aún no sabe que existe.",
@@ -276,19 +280,20 @@ const EVENTS = [
   },
   {
     id: 17,
-    title: "Belgrano y la Escarapela",
+    title: "Belgrano y las Cintas",
     subtitle: "Acto II · La Revolución · 1 de junio de 1810",
+    scene: { src: 'assets/scenes/cintas-belgrano.jpg', alt: 'Ilustración: un hombre muestra una cinta celeste y blanca a un joven mensajero en el patio de una casa de Buenos Aires.' },
     showCharacter: { id: 'belgrano', ctx: 'escarapela' },
     narrative: [
       "Manuel Belgrano tiene una idea que no ha compartido con nadie excepto con vos, esta tarde, en el patio trasero de su casa. Es un hombre que piensa en los símbolos tanto como en las leyes: sabe que las naciones necesitan imágenes que las convoquen, no solo argumentos que las convenzan.",
-      "Su idea: crear una escarapela oficial del nuevo gobierno, con los colores celeste y blanco — los mismos que French y Beruti usaron en la plaza, los colores de la Virgen, los colores del cielo del Río de la Plata. Una señal visual de identidad que unifique a los patriotas de distintas provincias y condiciones sociales.",
-      "Pero hay un problema político: publicar una escarapela oficial sería declarar implícitamente la separación de España, algo que la Junta todavía no ha hecho de manera formal. Saavedra, que prefiere la ambigüedad táctica, se opondrá. Moreno, paradójicamente, también, porque prefiere la declaración explícita a los símbolos implícitos.",
+      "Su idea: convertir las cintas celestes y blancas que French y Beruti repartieron en la plaza en el distintivo oficial del nuevo gobierno. Celeste y blanco: los colores de la Virgen, los colores del cielo del Río de la Plata. Hasta ahora fueron un gesto improvisado de unos pocos; Belgrano quiere que sean una señal de identidad que unifique a los patriotas de distintas provincias y condiciones sociales.",
+      "Pero hay un problema político: hacer oficial un distintivo propio sería declarar implícitamente la separación de España, algo que la Junta todavía no ha hecho de manera formal. Saavedra, que prefiere la ambigüedad táctica, se opondrá. Moreno, paradójicamente, también, porque prefiere la declaración explícita a los símbolos implícitos.",
       "Belgrano te pide consejo sincero, no político. ¿Es el momento? ¿Vale el riesgo político interno?"
     ],
     choices: [
-      { text: "Apoyar la escarapela como necesidad simbólica urgente — los pueblos necesitan emblemas.", prest: 2, riesgo: 5, special: { title: "LA ESCARAPELA NACIONAL", text: "Belgrano te agradece el apoyo con un gesto simple. Semanas después, la escarapela celeste y blanca será adoptada oficialmente. Has sido parte de una decisión que sobrevivirá siglos." }, label: "A" },
+      { text: "Apoyar que las cintas pasen a ser el distintivo oficial: los pueblos necesitan emblemas.", prest: 2, riesgo: 5, special: { title: "DE LA CINTA A LA ESCARAPELA", text: "Belgrano te agradece el apoyo con un gesto simple. La Junta todavía no se atreverá a oficializarlas, pero la idea queda sembrada. En febrero de 1812, casi dos años después, Belgrano propondrá al gobierno una escarapela celeste y blanca y será adoptada oficialmente; ese mismo mes izará en Rosario la primera bandera de esos colores. Lo que hoy discutís en voz baja se volverá símbolo de una nación." }, label: "A" },
       { text: "Aconsejar esperar a que la Junta tome una posición más clara sobre la independencia.", prest: 1, riesgo: -3, label: "B" },
-      { text: "Proponer que la escarapela se distribuya informalmente sin declaración oficial.", prest: 1, riesgo: 7, label: "C" }
+      { text: "Proponer que las cintas se sigan repartiendo informalmente, sin declaración oficial.", prest: 1, riesgo: 7, label: "C" }
     ]
   },
   {
@@ -559,6 +564,7 @@ const EVENTS = [
     id: 34,
     title: "Educación para Todos",
     subtitle: "Acto III · La Consolidación · 9 de agosto de 1810",
+    scene: { src: 'assets/scenes/escuela-1810.jpg', alt: 'Ilustración: niños de distintos orígenes en una escuela de primeras letras de Buenos Aires.' },
     narrative: [
       "En medio de todo lo que pasa —conspiraciones, debates políticos, crisis militares— surge algo que parece fuera de lugar pero no lo está: una propuesta de Manuel Belgrano para crear escuelas primarias en los barrios más pobres de Buenos Aires. Belgrano, que ha dedicado años a impulsar la educación como fundamento de la república, ve en este momento la oportunidad perfecta.",
       "La idea es sencilla en su formulación y revolucionaria en su impacto: cualquier niño, sin importar el origen de sus padres, tendría acceso a la lectura, la escritura y los principios básicos del civismo. Incluye a los hijos de los artesanos, de los labradores, de los esclavos libertos.",
@@ -821,6 +827,7 @@ const EVENTS = [
     id: 50,
     title: "Lo que Quedó",
     subtitle: "Epílogo · La Revolución · 1816",
+    scene: { src: 'assets/scenes/tucuman-1816.jpg', alt: 'Ilustración: diputados reunidos en una sala de Tucumán, 9 de julio de 1816.' },
     narrative: [
       "El 9 de julio de 1816, seis años y cuarenta y cinco días después del 25 de mayo de 1810, el Congreso reunido en Tucumán declaró la independencia de las Provincias Unidas del Río de la Plata. Para ese momento ya no estaban Moreno —muerto en el mar—, ni Castelli —muerto en silencio—, ni Liniers —fusilado en Córdoba en agosto de 1810. Muchos de los hombres que construyeron el puente de mayo se habían quemado con él. Los que sobrevivieron llegaron a 1816 con más cicatrices que certezas.",
       "Lo que siguió al 25 de mayo fue una guerra larga, extenuante, y más complicada de lo que cualquier optimista de la Jabonería hubiera podido imaginar. Las guerras de independencia se extendieron por todo el continente americano hasta 1824, cuando Bolívar y Sucre derrotaron a los realistas en la batalla de Ayacucho. Catorce años de guerra continental para completar lo que empezó en un cabildo de Buenos Aires un martes de mayo. El saldo humano fue devastador. El resultado político fue la creación de doce países nuevos donde antes había cuatro virreinatos.",

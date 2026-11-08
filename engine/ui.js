@@ -40,8 +40,8 @@ function showStatDelta(prestChange, riesgoChange) {
 // Ilustración de cada acto (recreaciones, ver manual). alt = descripción para lectores de pantalla.
 const ACT_SCENES = {
   1: { src: 'assets/scenes/jaboneria.jpg', alt: 'Ilustración: patriotas reunidos de noche en la jabonería de Vieytes.' },
-  2: { src: 'assets/scenes/cabildo-interior.jpg', alt: 'Ilustración: debate en el Cabildo Abierto del 22 de mayo de 1810.' },
-  3: { src: 'assets/scenes/balcon.jpg', alt: 'Ilustración: la multitud en la plaza frente al balcón del Cabildo, 25 de mayo de 1810.' }
+  2: { src: 'assets/scenes/jura-junta.jpg', alt: 'Ilustración: juramento de los miembros de la Primera Junta, 25 de mayo de 1810.' },
+  3: { src: 'assets/scenes/imprenta-gaceta.jpg', alt: 'Ilustración: la imprenta donde se publica la Gaceta de Buenos Aires.' }
 };
 
 function showActTransition(actNum, callback) {
