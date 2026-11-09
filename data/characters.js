@@ -122,6 +122,23 @@ const CHARACTERS = {
         "España se va a recuperar. Fernando va a volver al trono. Y cuando eso pase, los que se apresuraron a traicionar a la Corona van a tener que responder. Estás a tiempo de elegir el lado correcto.",
         "El orden que estas personas quieren destruir es el mismo que ha dado paz y comercio a estas tierras por doscientos años. ¿Qué ofrecen a cambio? Palabras sobre libertad escritas por hombres que nunca gobernaron nada."
       ]
+    },
+    // Preguntas opcionales (ver belgrano): respuesta en boca del personaje, en su tiempo.
+    preguntas: {
+      cabildoabierto: [
+        {
+          q: "¿Quién es usted, excelencia?",
+          a: "Soy marino, no político. Serví en la Armada del Rey durante muchos años y estuve en las batallas del cabo de San Vicente y de Trafalgar. En 1809 me mandaron a gobernar estas tierras, y llevo diez meses tratando de sostener el orden en un momento en que todo se tambalea."
+        },
+        {
+          q: "¿Qué pasó en España, excelencia?",
+          a: "Napoleón ocupó casi toda la Península y el rey Fernando está prisionero. Las noticias que llegaron hace unos días dicen que la Junta que gobernaba en nombre del rey se disolvió bajo el avance francés. Estos señores concluyen que a ustedes les toca mandarse solos. Yo digo que lo que corresponde es esperar al rey."
+        },
+        {
+          q: "¿Por qué abrió el comercio a los ingleses?",
+          a: "Porque la caja estaba vacía y la guerra cuesta. Dejé comerciar a los ingleses por un tiempo y con derechos, para que la Real Hacienda recibiera dinero. No fue un favor a nadie, fue una necesidad. Los hacendados querían más, los comerciantes españoles querían menos, y yo tuve que decidir entre los dos."
+        }
+      ]
     }
   },
 
@@ -243,6 +260,23 @@ const CHARACTERS = {
         "Sé por qué estás acá. Y sé lo que te van a pedir que me digas: que me rinda, que la causa está perdida, que mi resistencia solo añade sangre inútil a lo que ya es irreversible.",
         "Yo defendí esta ciudad contra los ingleses dos veces. Dos reconquistas, con los mismos criollos que hoy me llaman enemigo. No me pidas que entienda eso sin amargura.",
         "Pero te voy a decir algo que no le dirías a tu gente: lo que están haciendo tiene una lógica que entiendo, aunque no pueda aceptarla. Los imperios cambian. Las lealtades se ajustan. Solo espero que cuando lleguen al poder, sean mejores señores de lo que fueron súbditos."
+      ]
+    },
+    // Preguntas opcionales (ver belgrano): respuesta en boca del personaje, en su tiempo.
+    preguntas: {
+      cordoba: [
+        {
+          q: "¿Quién es usted, don Santiago?",
+          a: "Nací en Francia, en Niort, en 1753, hijo de un oficial de marina. Llegué a estas tierras como oficial de la Armada española. Soy francés de cuna y español de juramento, y por eso hay quien duda de mí aun después de todo lo que hice por esta ciudad."
+        },
+        {
+          q: "¿Cómo fue la Reconquista?",
+          a: "En 1806 los ingleses tenían Buenos Aires. Crucé el río desde la Banda Oriental con unos pocos soldados y la ciudad entera se levantó con nosotros: milicianos, vecinos, hombres y mujeres. La recuperamos el 12 de agosto, y al año siguiente la defendimos de un segundo ataque. Ese día aprendí que el valor no es de ningún cuerpo en particular, sino de quien defiende lo suyo."
+        },
+        {
+          q: "¿Por qué resiste a la Junta?",
+          a: "Después de dejar el virreinato me retiré a una estancia en Alta Gracia. Allí me alcanzó la noticia de lo de Buenos Aires. Con otros hombres de Córdoba resolvimos no obedecer a esta Junta, porque no la eligieron todos los pueblos del virreinato. No quiero sangre. Por eso mando esta propuesta: me retiro si se me garantiza la seguridad y se respeta mi honor."
+        }
       ]
     }
   }
