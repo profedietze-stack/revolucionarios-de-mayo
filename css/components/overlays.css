@@ -163,6 +163,52 @@
   flex: 1;
   margin-bottom: 28px;
 }
+/* Respuesta del personaje a una pregunta opcional: misma voz (cursiva) que el monólogo,
+   con la pregunta del jugador arriba en un tono más suave. */
+.char-dialogue-text.is-answer { font-size: 1.02rem; line-height: 1.65; }
+/* La parte todavía no escrita ocupa su lugar pero no se ve: el cuadro no salta de alto */
+.char-typed-rest { color: transparent; user-select: none; }
+.char-fade { animation: char-fade-in 0.45s ease both; }
+@keyframes char-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .char-fade { animation: none; } }
+.char-answer-q {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: normal;
+  font-size: 0.92rem;
+  color: var(--sepia);
+  margin-bottom: 8px;
+}
+.char-questions { margin-bottom: 16px; }
+.char-questions[hidden] { display: none; }
+.char-questions-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: var(--sepia);
+  margin-bottom: 8px;
+}
+.char-questions-list { display: flex; flex-direction: column; gap: 6px; }
+.char-question {
+  display: block; width: 100%;
+  text-align: left; cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--sepia-light);
+  color: var(--ink);
+  padding: 8px 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.98rem; line-height: 1.35;
+  transition: background 0.2s, border-color 0.2s;
+}
+.char-question::before { content: '✦ '; color: var(--sepia); font-size: 0.7rem; }
+.char-question:hover,
+.char-question:focus-visible {
+  background: rgba(197, 154, 64, 0.14);
+  border-color: var(--sepia);
+  outline: none;
+}
+.char-question.asked { opacity: 0.6; }
+.char-question.asked::before { content: '✓ '; }
 .char-dialogue-footer {
   display: flex;
   align-items: center;
@@ -203,6 +249,13 @@
   .char-dialogue-col { padding: 20px 20px 16px; }
   .char-dialogue-quote { font-size: 3rem; }
   .char-dialogue-text { font-size: 0.95rem; }
+  .char-dialogue-text.is-answer { font-size: 0.95rem; }
+  /* Con preguntas el cuadro scrollea: el botón CONTINUAR queda siempre a la vista */
+  .char-dialogue-footer {
+    position: sticky; bottom: 0;
+    background: var(--parchment);
+    padding-bottom: 4px;
+  }
 }
 
 /* ===== FINAL SCREEN — ACTA COLONIAL ===== */

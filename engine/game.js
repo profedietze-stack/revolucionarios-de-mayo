@@ -13,6 +13,67 @@ function getEvent(id) {
 let _charCallback = null;
 let _charLines = [];
 let _charLineIdx = 0;
+let _charQs = [];      // preguntas opcionales del contexto actual: [{q, a}]
+let _charAsked = [];   // índices ya preguntados
+
+// ---- Efecto de máquina de escribir para el diálogo (monólogo y respuestas) ----
+// El texto completo ya está en el DOM (la parte aún no escrita es transparente), así que
+// el cuadro no cambia de alto mientras se escribe. Tocar el texto o el botón lo completa.
+const CHAR_TYPE_CPS = 110;  // caracteres por segundo (~3 s para 300 caracteres)
+let _typeRaf = 0;
+let _typeToken = 0;
+let _typeDone = null;
+
+function _reducedMotion() {
+  try { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  catch (e) { return false; }
+}
+
+function _typeCancel() {
+  _typeToken++;
+  if (_typeRaf) clearTimeout(_typeRaf);
+  _typeRaf = 0;
+  _typeDone = null;
+}
+
+// Completa al instante el texto que se está escribiendo. Devuelve true si había algo en curso.
+function _typeFinish() {
+  if (!_typeDone) return false;
+  const finish = _typeDone;
+  _typeCancel();
+  finish();
+  return true;
+}
+
+// onDone se llama una sola vez al terminar de escribir (sola, o completada con un toque).
+function _typeInto(el, text, delayMs, onDone) {
+  _typeCancel();
+  const typed = document.createElement('span');
+  typed.className = 'char-typed';
+  const rest = document.createElement('span');
+  rest.className = 'char-typed-rest';
+  rest.textContent = text;
+  el.appendChild(typed);
+  el.appendChild(rest);
+  if (!text || _reducedMotion()) {
+    typed.textContent = text; rest.textContent = '';
+    if (onDone) onDone();
+    return;
+  }
+  const token = _typeToken;
+  const t0 = performance.now() + (delayMs || 0);
+  let shown = 0;
+  _typeDone = () => { typed.textContent = text; rest.textContent = ''; if (onDone) onDone(); };
+  // setTimeout y no requestAnimationFrame: rAF se pausa en pestañas ocultas y el texto nunca terminaría
+  const step = () => {
+    if (token !== _typeToken) return;
+    const n = Math.min(text.length, Math.max(0, Math.floor((performance.now() - t0) * CHAR_TYPE_CPS / 1000)));
+    if (n !== shown) { shown = n; typed.textContent = text.slice(0, n); rest.textContent = text.slice(n); }
+    if (n >= text.length) { _typeDone = null; _typeRaf = 0; if (onDone) onDone(); return; }
+    _typeRaf = setTimeout(step, 16);
+  };
+  _typeRaf = setTimeout(step, 16);
+}
 
 function showCharacter(id, ctxKey, callback) {
   const ch = (typeof CHARACTERS !== 'undefined') && CHARACTERS[id];
@@ -27,6 +88,8 @@ function showCharacter(id, ctxKey, callback) {
   _charCallback = callback;
   _charLines = ch.dialogos[ctxKey];
   _charLineIdx = 0;
+  _charQs = (ch.preguntas && Array.isArray(ch.preguntas[ctxKey])) ? ch.preguntas[ctxKey] : [];
+  _charAsked = [];
 
   const img = document.getElementById('char-portrait-img');
   img.onerror = function() { this.style.display = 'none'; };
@@ -42,15 +105,63 @@ function showCharacter(id, ctxKey, callback) {
 }
 
 function _renderCharLine() {
-  document.getElementById('char-dialogue-text').textContent = _charLines[_charLineIdx];
+  const txt = document.getElementById('char-dialogue-text');
+  txt.classList.remove('is-answer');
+  txt.textContent = '';
+  const isLastLine = _charLineIdx === _charLines.length - 1;
+  // Las preguntas aparecen (con fundido) recién cuando el personaje termina de hablar
+  _renderCharQuestions(false);
+  _typeInto(txt, _charLines[_charLineIdx], 0, isLastLine ? () => _renderCharQuestions(true, undefined, true) : null);
+  txt.onclick = _typeFinish;
   document.getElementById('char-dialogue-counter').textContent = `${_charLineIdx + 1} / ${_charLines.length}`;
   const isLast = _charLineIdx === _charLines.length - 1;
   document.getElementById('char-dialogue-btn-text').textContent = isLast ? 'CONTINUAR' : 'SIGUIENTE →';
 }
 
+function _renderCharQuestions(show, focusIdx, fade) {
+  const box = document.getElementById('char-questions');
+  const list = document.getElementById('char-questions-list');
+  if (!box || !list) return;
+  list.textContent = '';
+  box.classList.remove('char-fade');
+  if (!show || !_charQs.length) { box.hidden = true; return; }
+  if (fade) box.classList.add('char-fade');
+  _charQs.forEach((item, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'char-question' + (_charAsked.includes(i) ? ' asked' : '');
+    b.textContent = item.q;
+    b.onclick = () => charAskQuestion(i);
+    list.appendChild(b);
+  });
+  box.hidden = false;
+  if (typeof focusIdx === 'number' && list.children[focusIdx]) list.children[focusIdx].focus();
+}
+
+// Muestra la respuesta (dato histórico) a una pregunta opcional. No toca prestigio ni riesgo.
+function charAskQuestion(i) {
+  const item = _charQs[i];
+  if (!item) return;
+  if (!_charAsked.includes(i)) _charAsked.push(i);
+  const txt = document.getElementById('char-dialogue-text');
+  txt.classList.add('is-answer');
+  txt.textContent = '';
+  // Lo que preguntó el jugador (en su voz) y, debajo, la respuesta del personaje
+  const ask = document.createElement('span');
+  ask.className = 'char-answer-q char-fade';
+  ask.textContent = '— ' + item.q;
+  txt.appendChild(ask);
+  // La pregunta aparece con un fundido y, recién después, el personaje "habla"
+  _typeInto(txt, item.a, 450);
+  document.getElementById('char-dialogue-counter').textContent = `PREGUNTAS ${_charAsked.length} / ${_charQs.length}`;
+  _renderCharQuestions(true, i);
+}
+
 function charDialogueNext() {
   const ov = document.getElementById('overlay-character');
   if (!ov || !ov.classList.contains('visible')) return;
+  // Primer toque mientras el texto se escribe: lo completa; el siguiente avanza.
+  if (_typeFinish()) return;
   if (_charLineIdx < _charLines.length - 1) {
     _charLineIdx++;
     _renderCharLine();
@@ -60,6 +171,10 @@ function charDialogueNext() {
     _charCallback = null;
     _charLines = [];
     _charLineIdx = 0;
+    _charQs = [];
+    _charAsked = [];
+    _typeCancel();
+    _renderCharQuestions(false);
     if (cb) setTimeout(cb, 400);
   }
 }
