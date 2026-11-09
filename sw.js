@@ -3,7 +3,7 @@
 // Cachea el app shell para uso offline. Subí CACHE_VERSION en
 // cada release para forzar actualización del cache.
 // ============================================================
-const CACHE_VERSION = 'rev-mayo-v12.17';
+const CACHE_VERSION = 'rev-mayo-v12.21';
 
 // Archivos críticos: si falta uno, cache.addAll() falla y el SW no instala.
 const APP_SHELL = [
@@ -84,6 +84,18 @@ const SCENE_SHELL = [
   './assets/scenes/balcon.jpg',
   './assets/scenes/cintas.jpg',
   './assets/scenes/atardecer.jpg',
+  './assets/scenes/pilar-noche.jpg',
+  './assets/scenes/pilar-amanecer.jpg',
+  './assets/scenes/puerto-1810.jpg',
+  './assets/scenes/patricios-balcarce.jpg',
+  './assets/scenes/pueblo-cabildo.jpg',
+  './assets/scenes/delegacion-libertad.jpg',
+  './assets/scenes/carta-futuro.jpg',
+  './assets/scenes/jovenes-mensajeros.jpg',
+  './assets/scenes/zarpe-moreno.jpg',
+  './assets/scenes/castelli-tiahuanaco.jpg',
+  './assets/scenes/bandera-belgrano.jpg',
+  './assets/scenes/mapa-virreinato.jpg',
 ];
 
 self.addEventListener('install', (e) => {

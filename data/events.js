@@ -7,6 +7,7 @@ const EVENTS = [
     id: 1,
     title: "El Llamado",
     subtitle: "Acto I · La Tensión · 18 de abril de 1810",
+    scene: { src: 'assets/scenes/pilar-noche.jpg', alt: 'Ilustración: dos hombres se saludan de noche en la puerta de la Iglesia del Pilar, a la luz de un farol.' },
     narrative: [
       "La noche del 18 de abril cae sobre Buenos Aires con la densidad de un secreto largo tiempo guardado. Las calles adoquinadas están húmedas por la llovizna reciente, y los faroles de aceite proyectan sombras largas sobre las paredes encaladas. Caminas hacia la Iglesia del Pilar cuando una mano firme te detiene en el umbral.",
       "El hombre es de mediana edad, de mirada penetrante y ropa de comerciante. Susurra '{PLAYER}' con urgencia contenida. Dice llamarse Juan, aunque sus ojos dicen que ese no es su nombre verdadero. Te habla de libertad, de criollos como tú que merecen gobernar su propio destino, de un movimiento que ya está en marcha y necesita mensajeros de confianza.",
@@ -89,8 +90,9 @@ const EVENTS = [
     id: 6,
     title: "Rumores en el Puerto",
     subtitle: "Acto I · La Tensión · 8 de mayo de 1810",
+    scene: { src: 'assets/scenes/puerto-1810.jpg', alt: 'Ilustración: dos marineros discuten junto a unos barriles en la ribera mientras un hombre escucha; al fondo, carretas con bueyes y un barco anclado.' },
     narrative: [
-      "El puerto de Buenos Aires nunca duerme del todo. Mientras cumples la misión, escuchas en un muelle a dos marineros que discuten en voz alta lo que claramente deberían callar: refuerzos realistas están por llegar desde Montevideo. Una fragata con tropas y armas destinadas a 'restablecer el orden' en Buenos Aires.",
+      "El puerto de Buenos Aires nunca duerme del todo. Mientras cumples la misión, escuchas en la ribera a dos marineros que discuten en voz alta lo que claramente deberían callar: refuerzos realistas están por llegar desde Montevideo. Una fragata con tropas y armas destinadas a 'restablecer el orden' en Buenos Aires.",
       "La información es crucial. Si es cierta, los planes del movimiento patriota deben acelerarse o modificarse. La ventana para actuar sin represión militar se está cerrando. Pero también puede ser una trampa: información falsa plantada para que los patriotas se precipiten y cometan errores.",
       "Calculas el tiempo: si las tropas llegan en una semana, el Cabildo Abierto que los patriotas planean para el 22 de mayo podría realizarse bajo ocupación militar. Eso cambiaría todo.",
       "El sol está cayendo sobre el Río de la Plata y tienes que tomar una decisión sobre esta información urgente antes de que la oportunidad de actuar se pierda."
@@ -333,6 +335,7 @@ const EVENTS = [
     id: 20,
     title: "Soldados Leales",
     subtitle: "Acto II · La Revolución · 12 de junio de 1810",
+    scene: { src: 'assets/scenes/patricios-balcarce.jpg', alt: 'Ilustración: el general Balcarce habla a un grupo de hombres, soldados y civiles, en el patio de un cuartel.' },
     narrative: [
       "La revolución necesita músculos. Los argumentos filosóficos y los documentos legales son indispensables, pero sin una fuerza militar leal, la Junta es vulnerable a cualquier contraataque realista organizado. La militarización del movimiento se acelera.",
       "El General Balcarce, que comanda las fuerzas patriotas, te busca personalmente. Tu reputación como mensajero de confianza ha llegado a sus oídos. Te ofrece comandar un pequeño grupo de doce hombres: ex-milicianos de las Invasiones Inglesas, jóvenes artesanos, algunos esclavos libertos que han pedido unirse a cambio de su libertad.",
@@ -398,6 +401,7 @@ const EVENTS = [
     id: 24,
     title: "El Pronunciamiento del Pueblo",
     subtitle: "Acto II · La Revolución · 25 de junio de 1810",
+    scene: { src: 'assets/scenes/pueblo-cabildo.jpg', alt: 'Ilustración: artesanos, labradores y vecinos del pueblo en el patio del Cabildo, con una petición firmada.' },
     narrative: [
       "La revolución ha despertado algo que no esperaba despertar: al pueblo mismo. Artesanos, vendedores, trabajadores del puerto, labradores de los alrededores —personas que nunca antes habían tenido voz política— ahora la quieren. Se organizan en grupos, firman peticiones, se presentan ante el Cabildo con demandas concretas.",
       "La lista es larga y ambiciosa: abolición de los impuestos coloniales más onerosos, apertura de escuelas para los hijos de los pobres, libertad de comercio con todas las naciones, igualdad legal entre criollos y peninsulares, protección para los trabajadores artesanales. No son abstractos: son los problemas de sus vidas cotidianas.",
@@ -462,9 +466,10 @@ const EVENTS = [
     id: 28,
     title: "El Precio de la Libertad",
     subtitle: "Acto II · La Revolución · 14 de julio de 1810",
+    scene: { src: 'assets/scenes/delegacion-libertad.jpg', alt: 'Ilustración: una delegación de hombres negros libertos en un patio, con una petición escrita.' },
     narrative: [
       "Hay un tema que los líderes de la revolución evitan con destreza: la esclavitud. Buenos Aires tiene miles de esclavos — en las casas de las familias más importantes, en los talleres artesanales, en el puerto. Son invisibles en los debates sobre libertad y soberanía popular.",
-      "Pero hoy se hacen visibles. Una delegación de diez hombres negros libertos, liderada por un hombre llamado Joaquín que habla con la precisión de quien ha aprendido a argumentar para sobrevivir, se presenta ante vos. Han escuchado los discursos sobre libertad. Quieren saber si esa palabra los incluye.",
+      "Pero hoy se hacen visibles. Una delegación de hombres negros libertos, liderada por un hombre llamado Joaquín que habla con la precisión de quien ha aprendido a argumentar para sobrevivir, se presenta ante vos. Han escuchado los discursos sobre libertad. Quieren saber si esa palabra los incluye.",
       "Llevan una petición escrita en papel doblado cuatro veces. Piden que ningún hijo de esclavo nacido en el Río de la Plata a partir de mayo de 1810 nazca en condición de esclavitud. No piden la libertad inmediata de todos — saben que es imposible políticamente. Piden el comienzo del fin.",
       "Te piden que presentés la petición ante la Junta. Si lo hacés, vas contra los intereses de varias de las familias más influyentes de Buenos Aires. Si no lo hacés, la revolución perpetúa la contradicción más grande de su propio discurso."
     ],
@@ -581,6 +586,7 @@ const EVENTS = [
     id: 35,
     title: "El Futuro del Virreinato",
     subtitle: "Acto III · La Consolidación · 18 de agosto de 1810",
+    scene: { src: 'assets/scenes/mapa-virreinato.jpg', alt: 'Mapa esquemático del Virreinato del Río de la Plata en 1810, con el Alto Perú, Salta, Córdoba, Buenos Aires, Paraguay y la Banda Oriental.', caption: 'Mapa esquemático · tocá para ampliar', full: true },
     narrative: [
       "La Primera Junta no solo gobierna Buenos Aires: en teoría, gobierna todo el ex-Virreinato del Río de la Plata, que incluye territorios que hoy serían Argentina, Uruguay, Paraguay y parte de Bolivia. Pero Montevideo es leal a los realistas, Paraguay rechaza la autoridad de Buenos Aires, y el Alto Perú es un teatro de guerra.",
       "En la Junta se debate con urgencia la pregunta que define todo lo demás: ¿cuál es el proyecto territorial de esta revolución? ¿Busca crear un Estado central desde Buenos Aires? ¿Una confederación de provincias iguales? ¿O simplemente asegurar la autonomía local mientras el destino se define más adelante?",
@@ -693,6 +699,7 @@ const EVENTS = [
     id: 42,
     title: "La Carta del Futuro",
     subtitle: "Acto III · La Consolidación · 30 de septiembre de 1810",
+    scene: { src: 'assets/scenes/carta-futuro.jpg', alt: 'Ilustración: un hombre escribe una carta de noche, a la luz de una vela.' },
     narrative: [
       "Es tarde en la noche y Buenos Aires está quieta. Llevas semanas sin dormir bien, como todos. En tu mesa, a la luz de una vela que se consume, hay papel en blanco y una pluma que espera.",
       "Se te ha ocurrido —o quizás te lo ha sugerido alguien— la idea de escribir una carta. No para alguien de ahora, sino para el futuro: para los hijos y los nietos, para los historiadores del siglo que viene, para los ciudadanos de una Argentina que todavía no existe pero que ya está tomando forma en las decisiones de estos meses.",
@@ -725,6 +732,7 @@ const EVENTS = [
     id: 44,
     title: "Los Hijos de la Revolución",
     subtitle: "Acto III · La Consolidación · 18 de octubre de 1810",
+    scene: { src: 'assets/scenes/jovenes-mensajeros.jpg', alt: 'Ilustración: tres jóvenes corren por una calle de Buenos Aires llevando cartas y ejemplares de la Gaceta.' },
     narrative: [
       "Han pasado cinco meses desde el 25 de mayo y la revolución está produciendo algo que nadie planeó del todo: una generación joven que creció creyendo que el orden colonial era eterno y que ahora lo ve desmoronarse. Jóvenes de quince, dieciséis años que quieren ser parte de lo que está pasando.",
       "French y Beruti los han organizado informalmente como correos rápidos, distribuidores de la Gaceta, informantes en los barrios. Pero hay una tensión que crece: algunos de estos jóvenes están siendo usados para tareas que los exponen a riesgos que no comprenden plenamente. Lorenzo, el mensajero capturado, tenía dieciséis años.",
@@ -741,6 +749,7 @@ const EVENTS = [
     id: 45,
     title: "El Destino",
     subtitle: "Acto III · La Consolidación · 1 de noviembre de 1810",
+    scene: { src: 'assets/scenes/pilar-amanecer.jpg', alt: 'Ilustración: un hombre con un morral camina hacia la puerta de la Iglesia del Pilar al amanecer.' },
     narrative: [
       "Es el primer día de noviembre de 1810. Han pasado casi seis meses desde aquella noche del 18 de abril cuando un extraño te abordó en la Iglesia del Pilar y cambió el curso de tu vida. Seis meses que han durado décadas en experiencia y en cicatrices que el tiempo enseñará a llevar.",
       "La Primera Junta está consolidada. La expedición al norte avanza. La Gaceta de Buenos Aires sigue publicándose. Córdoba fue sometida —con consecuencias dolorosas que todavía resuenan en tu conciencia. Buenos Aires respira como ciudad diferente: más libre, más incierta, más viva en su incertidumbre que en la seguridad del orden que fue.",
@@ -763,6 +772,8 @@ const EVENTS = [
     id: 46,
     title: "El Viaje Sin Regreso",
     subtitle: "Epílogo · Mariano Moreno · 1811",
+    portrait: 'moreno',
+    scene: { src: 'assets/scenes/zarpe-moreno.jpg', alt: 'Ilustración: un bote se acerca a la fragata que llevará a Mariano Moreno a Europa, enero de 1811.' },
     narrative: [
       "Buenos Aires, enero de 1811. Han pasado ocho meses desde el 25 de mayo y la Primera Junta se fractura entre morenistas y saavedristas con una violencia política que sería hermosa si no tuviera consecuencias reales. Moreno —el cerebro de la revolución, su voz más afilada y su pluma más peligrosa— está siendo enviado a Europa. La misión oficial: negociar reconocimiento diplomático. La misión real: sacarlo de Buenos Aires antes de que gane o de que destruya lo que se construyó.",
       "Te llega la noticia de su partida por un contacto en el puerto. No hubo ceremonias públicas. Moreno abordó la fragata inglesa 'La Fama' el 24 de enero de 1811, en La Ensenada, con dos baúles de libros, una fiebre que arrastraba desde diciembre, y una certeza que no puso en los papeles oficiales. Sus últimas palabras en tierra argentina, según quien estuvo presente, fueron para el criado que lo acompañaba al muelle: 'Cuidá los libros. Los libros son lo único que no va a traicionarme.'",
@@ -779,6 +790,8 @@ const EVENTS = [
     id: 47,
     title: "El Tribuno Silenciado",
     subtitle: "Epílogo · Juan José Castelli · 1811-1812",
+    portrait: 'castelli',
+    scene: { src: 'assets/scenes/castelli-tiahuanaco.jpg', alt: 'Ilustración: Castelli proclama la igualdad ante una multitud indígena entre las ruinas de Tiahuanaco, 25 de mayo de 1811.' },
     narrative: [
       "Hay algo que cuesta aceptar sobre la historia: que los hombres con las ideas más grandes a veces producen los desastres más costosos. Castelli —el tribuno de Mayo, el que habló ante el Cabildo con la elocuencia de los justos— comandó el Ejército del Norte con la misma convicción con que pronunciaba discursos. El 25 de mayo de 1811, exactamente un año después de la revolución, proclamó en Tiahuanaco la igualdad legal entre criollos e indígenas. Fue el gesto más radical que la revolución había producido. Nadie en Buenos Aires se lo había pedido.",
       "Menos de un mes después, el 20 de junio de 1811, el ejército patriota es derrotado en Huaqui con una contundencia que no deja margen a interpretación. Miles de muertos. El Alto Perú vuelve a manos realistas. Las razones serán debatidas durante décadas: que los hombres estaban mal armados, que fue traicionado, que sus proclamas radicales enajenaron a los aliados locales que necesitaba. Probablemente todo sea cierto y nada alcance para explicar completamente lo que ocurrió en ese campo.",
@@ -795,6 +808,8 @@ const EVENTS = [
     id: 48,
     title: "La Bandera que Nadie Pidió",
     subtitle: "Epílogo · Manuel Belgrano · 1812-1820",
+    portrait: 'belgrano',
+    scene: { src: 'assets/scenes/bandera-belgrano.jpg', alt: 'Ilustración: Belgrano iza la bandera celeste y blanca en las barrancas del Paraná, frente a sus tropas, 1812.' },
     narrative: [
       "En febrero de 1812, Manuel Belgrano —el economista que se convirtió en general porque la revolución necesitaba generales y él no sabía decir que no— iza por primera vez en la costa del Paraná una bandera de dos franjas celestes y una blanca. Nadie se la encargó. Buenos Aires, cuando se entera, le manda una orden directa: arriárala, el gesto es prematuro, no hay bandera nacional todavía. Belgrano acusa recibo de la orden. La bandera sigue izada.",
       "En septiembre de 1812 desobedece una orden todavía más importante. Le indican retroceder hasta Córdoba para conservar fuerzas. Belgrano entiende lo que sus superiores no ven desde sus escritorios: si el ejército retrocede, el norte cae, y si el norte cae, la revolución pierde su profundidad territorial y su credibilidad. Elige dar batalla en Tucumán con 1.800 hombres contra 3.000 realistas. Gana. Si hubiera obedecido, probablemente no habrías tenido una nación para la que trabajar.",
@@ -811,6 +826,7 @@ const EVENTS = [
     id: 49,
     title: "El Presidente que Sobrevivió",
     subtitle: "Epílogo · Cornelio Saavedra · 1811-1829",
+    portrait: 'saavedra',
     narrative: [
       "Cornelio Saavedra —el presidente de la Primera Junta, el que puso el peso del Regimiento de Patricios del lado de la revolución cuando hacía falta y que hizo posible con su respaldo lo que Moreno y Castelli construyeron con palabras— fue desplazado del poder en septiembre de 1811. El Primer Triunvirato que lo reemplazó era más joven, más radical, y tenía prisa por demostrar que la revolución no era cosa de un solo hombre. Saavedra pagó el precio de los que llegan primero cuando llegan los segundos.",
       "Lo acusaron de conspirar. Lo exiliaron a Mendoza. Pasó por San Juan y por Chile, y recién en 1818 Pueyrredón lo rehabilitó, le devolvió el grado y lo nombró Jefe del Estado Mayor —siete años después de la caída, cuando el Triunvirato que lo había expulsado ya había sido a su vez desplazado —la revolución devoraba sus propias estructuras con una regularidad que empezaba a verse como patrón, no como accidente. Participó en campañas menores. Nadie le prestó demasiada atención. El hombre cuya firma en la Primera Junta abrió el capítulo más importante de estas tierras se volvió figura del pasado durante su propia vida.",

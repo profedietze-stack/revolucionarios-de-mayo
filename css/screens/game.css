@@ -142,6 +142,34 @@
   padding-bottom: 12px; border-bottom: 1px solid var(--parchment-deep);
   letter-spacing: 0.05em;
 }
+/* Tarjeta de personaje (epílogos) */
+.event-portrait {
+  display: flex; align-items: center; gap: 16px;
+  margin: 0 0 20px;
+}
+.event-portrait[hidden] { display: none; }
+.event-portrait img {
+  width: 110px; height: 110px; flex: 0 0 110px;
+  object-fit: cover;
+  border: 2px solid var(--sepia);
+  border-radius: 3px;
+  box-shadow: 0 4px 14px rgba(26,16,5,0.25);
+}
+.event-portrait-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem; font-weight: 600;
+  color: var(--navy); letter-spacing: 0.06em;
+}
+.event-portrait-cargo {
+  margin-top: 4px;
+  font-size: 0.85rem; font-style: italic;
+  color: var(--sepia);
+}
+@media (max-width: 600px) {
+  .event-portrait { gap: 12px; }
+  .event-portrait img { width: 84px; height: 84px; flex-basis: 84px; }
+}
+
 /* Ilustración del evento */
 .event-scene {
   margin: 0 0 20px;
@@ -165,6 +193,23 @@
 @media (max-width: 600px) {
   .event-scene img { max-height: 190px; }
 }
+/* Escenas con texto (mapas): sin recorte, clic para ampliar */
+.event-scene--full img { max-height: none; cursor: zoom-in; }
+@media (max-width: 600px) {
+  .event-scene--full img { max-height: none; }
+}
+.event-scene.zoomed {
+  position: fixed; inset: 0; z-index: 9999; margin: 0;
+  display: flex; flex-direction: column;
+  overflow: auto; padding: 14px;
+  background: rgba(20, 12, 4, 0.95);
+  cursor: zoom-out;
+}
+.event-scene.zoomed img {
+  width: 1000px; max-width: none; max-height: none;
+  height: auto; margin: auto; cursor: zoom-out;
+}
+.event-scene.zoomed figcaption { color: var(--sepia-pale); text-align: center; flex: 0 0 auto; margin-top: 8px; }
 .narrative-text {
   font-size: 1.1rem; line-height: 1.85;
   color: var(--ink-light); margin-bottom: 12px;

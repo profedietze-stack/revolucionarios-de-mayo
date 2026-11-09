@@ -81,6 +81,25 @@ function _doRenderEvent(ev) {
   document.getElementById('event-title').textContent = `${ev.id}. ${ev.title}`;
   document.getElementById('event-subtitle').textContent = ev.subtitle || '';
 
+  // Tarjeta de personaje opcional (ev.portrait = id de CHARACTERS), p. ej. en los epílogos
+  const portEl = document.getElementById('event-portrait');
+  const portImg = document.getElementById('event-portrait-img');
+  if (portEl && portImg) {
+    const pc = (typeof CHARACTERS !== 'undefined' && ev.portrait) ? CHARACTERS[ev.portrait] : null;
+    if (pc && pc.img) {
+      portImg.onerror = () => { portEl.hidden = true; };
+      portImg.alt = 'Retrato recreativo de ' + pc.nombre;
+      portImg.src = pc.img;
+      document.getElementById('event-portrait-name').textContent = pc.nombre;
+      document.getElementById('event-portrait-cargo').textContent = pc.cargo || '';
+      portEl.hidden = false;
+    } else {
+      portImg.onerror = null;
+      portEl.hidden = true;
+      portImg.removeAttribute('src');
+    }
+  }
+
   // Ilustración opcional del evento (ev.scene = { src, alt })
   const sceneFig = document.getElementById('event-scene');
   const sceneImg = document.getElementById('event-scene-img');
@@ -89,10 +108,30 @@ function _doRenderEvent(ev) {
       sceneImg.onerror = () => { sceneFig.hidden = true; };
       sceneImg.alt = ev.scene.alt || '';
       sceneImg.src = ev.scene.src;
+      // Escenas "full" (p. ej. mapas con texto): sin recorte y con clic para ampliar
+      const capEl = document.getElementById('event-scene-caption');
+      if (capEl) capEl.textContent = ev.scene.caption || 'Ilustración recreativa';
+      sceneFig.classList.remove('zoomed');
+      sceneFig.classList.toggle('event-scene--full', !!ev.scene.full);
+      if (ev.scene.full) {
+        sceneFig.setAttribute('role', 'button');
+        sceneFig.tabIndex = 0;
+        sceneFig.onclick = () => sceneFig.classList.toggle('zoomed');
+        sceneFig.onkeydown = (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sceneFig.classList.toggle('zoomed'); }
+          else if (e.key === 'Escape') sceneFig.classList.remove('zoomed');
+        };
+      } else {
+        sceneFig.removeAttribute('role');
+        sceneFig.removeAttribute('tabindex');
+        sceneFig.onclick = null;
+        sceneFig.onkeydown = null;
+      }
       sceneFig.hidden = false;
     } else {
       sceneImg.onerror = null;
       sceneFig.hidden = true;
+      sceneFig.classList.remove('zoomed', 'event-scene--full');
       sceneImg.removeAttribute('src');
     }
   }
